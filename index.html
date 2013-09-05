@@ -2,11 +2,22 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>My shiny site</title>
+	<title>dotadup - Trade your duplicate Items</title>
+	<meta name="description" content="Trade your duplicate Items">
+	<meta name="author" content="yene">
+	<meta name="keywords" content="Dota 2, trade, items, dupliacte">
 	<!-- Normalize.css is a customisable CSS file that makes browsers render all elements more consistently and in line with modern standards. -->
 	<link rel="stylesheet" media="screen" href="https://raw.github.com/necolas/normalize.css/master/normalize.css">
 
 	<style>
+	/* colors
+#F6F4F4 white
+#871201 dark red
+#EF1A0E bright red
+#D8D7E8 grey
+#FFF0E9 mild white
+	*/
+
 		/* apply a natural box layout model to all elements http://paulirish.com/2012/box-sizing-border-box-ftw/ */
 		* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
 		
@@ -14,11 +25,19 @@
 			/* best helvetica */
 			font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 			font-weight: 300;
+			background-color: #FFF0E9;
+			margin: 0;
+			padding: 20px;
+		}
+
+		.wrapper {
+			background-color: #D8D7E8;
+			border-radius: 10px;
+			padding: 8px;
 		}
 
 		header {
-			background-color: red;
-			opacity: 0.8;
+			height: 40px;
 		}
 
 		header li {
@@ -30,7 +49,7 @@
 	</style>
 </head>
 <body>
-	<header>
+	<header class="wrapper">
 		<nav>
 			<ul>
 				<li>Menu item</li>
@@ -39,13 +58,13 @@
 		</nav>
 	</header>
 	<br style="clear: both;">
-	<section>
+	<section class="wrapper">
 		ok did it work?
 		<div>result</div>
 
 
 	</section>
-	<footer>
+	<footer class="wrapper">
 		<p>Copyright 2013 yene</p>
 	</footer>
 </body>
