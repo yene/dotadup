@@ -118,12 +118,24 @@ try {
 			width: 256px;
 			height: 170px;
 			border: 1px solid #871201;
-			padding: 0;
+			padding: 10px;
+			margin: 5px;
 		}
 
 		.itemTitle {
+			text-align: center;
+			top: 90px;
+			position: relative;
+			display: table;
+    	margin: 0 auto;
 			font-size: 20px;
-			font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+			background-color: #FFF0E9;
+			border-radius: 10px;
+			padding-left: 8px;
+			padding-right: 8px;
+			padding-top: 2px;
+			padding-bottom: 2px;
+			opacity: 0.8;
 		}
 
 	</style>
@@ -157,9 +169,7 @@ try {
 			</ul>
 		</nav>
 	</header>
-	<br style="clear: both;">
-	<section class="wrapper">
-		<pre>
+	<section class="wrapper" style="display: inline-block">
 <?php
 
 //  http://steamcommunity.com/profiles/<PROFILEID>/inventory/json/753/1
@@ -210,8 +220,6 @@ if ($items["success"] === "false") {
 }
 
 ?>
-</pre>
-
 	</section>
 	<footer class="wrapper">
 		<p>Dota 2 is a registered trademark of Valve Corporation. This site is not affiliated with Valve Corporation. All game images and names are property of Valve Corporation. <a href="http://steampowered.com/">Powered by Steam</a></p>
