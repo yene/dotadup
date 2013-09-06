@@ -146,8 +146,48 @@ try {
 	</header>
 	<br style="clear: both;">
 	<section class="wrapper">
-		ok did it work?
-		<div>result</div>
+		<pre>
+<?php
+
+//  http://steamcommunity.com/profiles/<PROFILEID>/inventory/json/753/1
+//http://steamcommunity.com/id/yene/inventory/json/570/2
+$url = "http://steamcommunity.com/profiles/" .$_SESSION['userID']. "/inventory/json/570/2";
+$itemJson = file_get_contents($url);
+$items = json_decode($itemJson, true);
+
+// duplicate items in rgInventory have the same classid + instance id
+
+// daten sind in rgDescriptions, key ist 93975462_57949762, classid + instance id
+
+if ($items["success"] === "false") {
+	echo $items["Error"];
+} else {
+
+	$countedItems = array();
+
+	// count items
+	foreach ($items['rgInventory'] as $key => $value) {
+		$id = $value["classid"] . "_" . $value["instanceid"];
+		if (array_key_exists($id, $countedItems)) {
+			$countedItems[$id] = $countedItems[$id] + 1;
+		} else {
+			$countedItems[$id] = 1;
+		}
+	}
+
+	foreach ($countedItems as $key => $value) {
+		if ($value > 1) {
+			echo $items['rgDescriptions'][$key]['name'];
+			echo "<br>";
+
+		}
+	}
+
+}
+
+?>
+</pre>
+
 	</section>
 	<footer class="wrapper">
 		<p>Dota 2 is a registered trademark of Valve Corporation. This site is not affiliated with Valve Corporation. All game images and names are property of Valve Corporation. <a href="http://steampowered.com/">Powered by Steam</a></p>
