@@ -48,7 +48,7 @@ try {
 	<meta name="keywords" content="Dota 2, trade, items, dupliacte">
 	<!-- Normalize.css is a customisable CSS file that makes browsers render all elements more consistently and in line with modern standards. -->
 	<link rel="stylesheet" media="screen" href="https://raw.github.com/necolas/normalize.css/master/normalize.css">
-
+	 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 	<style>
 	/* colors
 #F6F4F4 white
@@ -113,6 +113,19 @@ try {
 			color: ;
 		}
 
+		.itemBox {
+			float: left;
+			width: 256px;
+			height: 170px;
+			border: 1px solid #871201;
+			padding: 0;
+		}
+
+		.itemTitle {
+			font-size: 20px;
+			font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+		}
+
 	</style>
 </head>
 <body>
@@ -155,6 +168,9 @@ $url = "http://steamcommunity.com/profiles/" .$_SESSION['userID']. "/inventory/j
 $itemJson = file_get_contents($url);
 $items = json_decode($itemJson, true);
 
+
+$imageUrl = "http://cdn.steamcommunity.com/economy/image/";
+
 // duplicate items in rgInventory have the same classid + instance id
 
 // daten sind in rgDescriptions, key ist 93975462_57949762, classid + instance id
@@ -164,23 +180,31 @@ if ($items["success"] === "false") {
 } else {
 
 	$countedItems = array();
+	$douplicateItems = array();
 
 	// count items
 	foreach ($items['rgInventory'] as $key => $value) {
+		// ignore chests
+		if ($value["instanceid"] == 0) continue;
+
+
+
 		$id = $value["classid"] . "_" . $value["instanceid"];
 		if (array_key_exists($id, $countedItems)) {
 			$countedItems[$id] = $countedItems[$id] + 1;
+			$douplicateItems[] = $id;
 		} else {
 			$countedItems[$id] = 1;
 		}
 	}
 
-	foreach ($countedItems as $key => $value) {
-		if ($value > 1) {
-			echo $items['rgDescriptions'][$key]['name'];
-			echo "<br>";
-
-		}
+	foreach ($douplicateItems as $key => $value) {
+		$image = $imageUrl . $items['rgDescriptions'][$value]['icon_url'];
+		?>
+		<div class="itemBox" style="background-image: url(<?=$image?>);">
+			<p class="itemTitle"><?=$items['rgDescriptions'][$value]['name']?></p>
+		</div>
+		<?php
 	}
 
 }
