@@ -42,8 +42,8 @@ try {
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>dotadup - Trade your duplicate Items</title>
-	<meta name="description" content="Trade your duplicate Items">
+	<title>dotadup - Trade your duplicate Dota 2 items</title>
+	<meta name="description" content="Trade your duplicate Dota 2 items">
 	<meta name="author" content="yene">
 	<meta name="keywords" content="Dota 2, trade, items, dupliacte">
 	<!-- Normalize.css is a customisable CSS file that makes browsers render all elements more consistently and in line with modern standards. -->
