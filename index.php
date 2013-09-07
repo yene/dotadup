@@ -231,11 +231,19 @@ try {
 
 <?php
 
-//  http://steamcommunity.com/profiles/<PROFILEID>/inventory/json/753/1
+//http://steamcommunity.com/profiles/<PROFILEID>/inventory/json/753/1
 //http://steamcommunity.com/id/yene/inventory/json/570/2
 $url = "http://steamcommunity.com/profiles/" .$_SESSION['userID']. "/inventory/json/570/2";
+$url = "http://steamcommunity.com/id/Chook/inventory/json/570/2";
 $itemJson = file_get_contents($url);
 $items = json_decode($itemJson, true);
+
+/*
+	aui_2000
+	cyborgmatt
+	Robinlee
+	Chook
+*/
 
 
 $imageUrl = "http://cdn.steamcommunity.com/economy/image/";
@@ -248,17 +256,31 @@ if ($items["success"] === "false") {
 	echo $items["Error"];
 } else {
 
+	$itemWhitelist = array();
+	$itemWhitelist[] = "DOTA_WearableType_Wearable";
+	$itemWhitelist[] = "courier";
+	$itemWhitelist[] = "DOTA_WearableType_Taunt";
+
+	$itemBlackList = array();
+	$itemBlackList[] = "DOTA_OtherType";
+
 	$countedItems = array();
 	$douplicateItems = array();
 
 	// count items
 	foreach ($items['rgInventory'] as $key => $value) {
-		// ignore chests
-		if ($value["instanceid"] == 0) continue;
-
-
 
 		$id = $value["classid"] . "_" . $value["instanceid"];
+
+		// check if item is in the white or black list (tags are checked)
+		$skip = TRUE;
+		foreach ($items['rgDescriptions'][$id]["tags"] as $key2 => $value2) {
+			if (in_array($value2["internal_name"], $itemBlackList)) continue 2;
+			if (in_array($value2["internal_name"], $itemWhitelist)) $skip = FALSE;
+		}
+
+		if ($skip) continue;
+
 		if (array_key_exists($id, $countedItems)) {
 			$countedItems[$id] = $countedItems[$id] + 1;
 			$douplicateItems[] = $id;
@@ -270,7 +292,7 @@ if ($items["success"] === "false") {
 	foreach ($douplicateItems as $key => $value) {
 		$image = $imageUrl . $items['rgDescriptions'][$value]['icon_url'];
 		?>
-		<div class="itemBox" style="background-image: url(<?=$image?>);">
+		<div class="itemBox" style="background-image: url(<?=$image?>);" title="<?=print_r($items['rgDescriptions'][$value]['tags'], true) ?>">
 			<p class="itemTitle"><?=$items['rgDescriptions'][$value]['name']?></p>
 		</div>
 		<?php

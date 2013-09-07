@@ -1,4 +1,4 @@
-![alt tag](https://raw.github.com/yene/dotadup/master/screenshot.jpg)
+![screenshot](https://raw.github.com/yene/dotadup/master/screenshot.jpg)
 
 Flow
 
