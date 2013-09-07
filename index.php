@@ -1,6 +1,6 @@
 <?php
 session_start();
-$apikey = "86F1ACC15C5F0A97465AA051D68122F6";
+require "apikey.php";
 
 # Logging in with Google accounts requires setting special identity, so this example shows how to do it.
 # The returned Claimed ID will contain the user's 64-bit SteamID. 
