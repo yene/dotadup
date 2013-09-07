@@ -58,8 +58,23 @@ try {
 		 $( "nav ul li" ).click(function () {
 		   $(this).toggleClass("active");
 		 });
-
 	 });
+
+		function trade() {
+			var count = 0;
+			var userID = <?=$_SESSION['userID']?>;
+			$( ".itemBox.selected" ).each(function( index ) {
+				count++;
+				console.log( $(this).attr("data-item-id") );
+			});
+			
+			if (count == 0) {
+				alert("Nothing selected.");
+			}
+
+		}
+
+
 	 </script>
 
 
@@ -220,6 +235,7 @@ try {
 		<nav class="wrapper">
 			<ul>
 				<li class="active"><a href="#">Trade</a></li>
+				<li><a href="#">Trade History</a></li>
 				<li><a href="#">Help</a></li>
 				<li><a href="#">Donate</a></li>
 				<li><a href="#">Settings</a></li>
@@ -235,6 +251,11 @@ try {
 //http://steamcommunity.com/id/yene/inventory/json/570/2
 $url = "http://steamcommunity.com/profiles/" .$_SESSION['userID']. "/inventory/json/570/2";
 $url = "http://steamcommunity.com/id/Chook/inventory/json/570/2";
+
+if (isset($_GET["test"])) {
+	$url = "http://steamcommunity.com/" . $_GET["test"] . "/inventory/json/570/2";
+}
+
 $itemJson = file_get_contents($url);
 $items = json_decode($itemJson, true);
 
@@ -243,6 +264,9 @@ $items = json_decode($itemJson, true);
 	cyborgmatt
 	Robinlee
 	Chook
+	profiles/76561197980022982
+	profiles/76561198073883598
+	id/MasterMo66/
 */
 
 
@@ -292,7 +316,9 @@ if ($items["success"] === "false") {
 	foreach ($douplicateItems as $key => $value) {
 		$image = $imageUrl . $items['rgDescriptions'][$value]['icon_url'];
 		?>
-		<div class="itemBox" style="background-image: url(<?=$image?>);" title="<?=print_r($items['rgDescriptions'][$value]['tags'], true) ?>">
+		<div class="itemBox" style="background-image: url(<?=$image?>);" 
+			title="<?=print_r($items['rgDescriptions'][$value]['tags'], true) ?>"
+			data-item-id="<?=$value?>">
 			<p class="itemTitle"><?=$items['rgDescriptions'][$value]['name']?></p>
 		</div>
 		<?php
@@ -301,6 +327,8 @@ if ($items["success"] === "false") {
 }
 
 ?>
+	<br style="clear: both;";>
+	<button type="button" onclick="trade()">Trade Selected Items</button>
 	</section>
 	<footer class="wrapper">
 		<p>Dota 2 is a registered trademark of Valve Corporation. This site is not affiliated with Valve Corporation. All game images and names are property of Valve Corporation. <a href="http://steampowered.com/">Powered by Steam</a></p>
