@@ -49,6 +49,20 @@ try {
 	<!-- Normalize.css is a customisable CSS file that makes browsers render all elements more consistently and in line with modern standards. -->
 	<link rel="stylesheet" media="screen" href="https://raw.github.com/necolas/normalize.css/master/normalize.css">
 	 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+	 <script>
+	 $(document).ready(function(){
+		 $( ".itemBox" ).click(function () {
+		   $(this).toggleClass("selected");
+		 });
+
+		 $( "nav ul li" ).click(function () {
+		   $(this).toggleClass("active");
+		 });
+
+	 });
+	 </script>
+
+
 	<style>
 	/* colors
 #F6F4F4 white
@@ -71,6 +85,8 @@ try {
 		}
 
 		.wrapper {
+			display: inline-block; 
+			width: 100%;
 			background-color: #D8D7E8;
 			border-radius: 10px;
 			padding: 10px;
@@ -108,9 +124,12 @@ try {
 
 		a {
 			color: #871201;
+			text-decoration: none;
 		}
-		a:hover {
-			color: ;
+
+		.active {
+			color: #F6F4F4;
+			background-color: #EF1A0E;
 		}
 
 		.itemBox {
@@ -138,13 +157,44 @@ try {
 			opacity: 0.8;
 		}
 
+		.selected {
+			border: 3px solid #EF1A0E;
+		}
+
+		.title {
+			font-size: 60px;
+			color: #871201;
+		  text-shadow: 0 1px 0 #ccc,
+		               0 2px 0 #c9c9c9,
+		               0 3px 0 #bbb,
+		               0 4px 0 #b9b9b9,
+		               0 5px 0 #aaa,
+		               0 6px 1px rgba(0,0,0,.1),
+		               0 0 5px rgba(0,0,0,.1),
+		               0 1px 3px rgba(0,0,0,.3),
+		               0 3px 5px rgba(0,0,0,.2),
+		               0 5px 10px rgba(0,0,0,.25),
+		               0 10px 10px rgba(0,0,0,.2),
+		               0 20px 20px rgba(0,0,0,.15);
+		}
+
+		.username {
+			font-size: 30px;
+		}
+
+		.username img {
+			vertical-align: middle;
+			border-radius: 5px;
+		}
+
+
 	</style>
 </head>
 <body>
 	<header>
 		<div class="wrapper">
-			<h1>Dotadup</h1>
-			<div>
+			<h1 class="title" style="display:inline;">Dotadup</h1>
+			<div class="username" style="display:inline; float: right;">
 <?php
 	if (!isset($_SESSION['userID'])) {
 ?>
@@ -152,7 +202,7 @@ try {
 <?php
 	} else {
 ?>
-		<p><?=$_SESSION['name'] ?>  <img src="<?=$_SESSION['avatar'] ?>"></p>
+		<?=$_SESSION['name'] ?>  <img src="<?=$_SESSION['avatar'] ?>">
 <?php
 	}
 ?>
@@ -169,7 +219,9 @@ try {
 			</ul>
 		</nav>
 	</header>
-	<section class="wrapper" style="display: inline-block">
+	<section class="wrapper">
+		<h1>Your duplicate Items.</h1><p>Please select the wan you want to trade.</p>
+
 <?php
 
 //  http://steamcommunity.com/profiles/<PROFILEID>/inventory/json/753/1
