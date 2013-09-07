@@ -88,7 +88,7 @@ try {
 			display: inline-block; 
 			width: 100%;
 			background-color: #D8D7E8;
-			border-radius: 10px;
+			border-radius: 5px;
 			padding: 10px;
 			margin: 0 0 20px 0;
 		}
@@ -104,12 +104,13 @@ try {
 			list-style-type: none;
 			margin: 0;
 			padding: 0;
+			margin-bottom: 2px;
+			margin-top: 2px;
 		}
 
 		nav li {
 			display: inline;
-			margin-bottom: 2px;
-			margin-top: 2px;
+
 			list-style:  none;
 			border-radius: 5px;
 			padding-left: 12px;
@@ -122,14 +123,21 @@ try {
 			background-color: #FFF0E9;
 		}
 
+		nav li:hover a {
+			color: #871201;
+		}
+
 		a {
 			color: #871201;
 			text-decoration: none;
 		}
 
 		.active {
-			color: #F6F4F4;
 			background-color: #EF1A0E;
+		}
+
+		.active a {
+			color: #F6F4F4;
 		}
 
 		.itemBox {
@@ -211,11 +219,10 @@ try {
 		</div>
 		<nav class="wrapper">
 			<ul>
-				<li class="active"><a href="">Trade</a></li>
-				<li><a href="">About</a></li>
-				<li><a href="">Help</a></li>
-				<li><a href="">Donate</a></li>
-				<li><a href="">Settings</a></li>
+				<li class="active"><a href="#">Trade</a></li>
+				<li><a href="#">Help</a></li>
+				<li><a href="#">Donate</a></li>
+				<li><a href="#">Settings</a></li>
 			</ul>
 		</nav>
 	</header>
