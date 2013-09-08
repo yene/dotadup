@@ -15,8 +15,9 @@ bot.logOn({
   shaSentryfile: sentry
 });
 bot.on('loggedOn', function() {
-	console.log("i am inside");
-	bot.setPersonaState(1); // EPersonaState.online
+	console.log("logged on");
+	bot.setPersonaState(Steam.EPersonaState.Online); // to display your bot's status as "Online"
+	bot.setPersonaName('Dotadup'); // to change its nickname
 
 	// test steam trade
 	steamTrade.sessionID = bot.webSessionID;
@@ -41,9 +42,9 @@ bot.on('sentry', function(buffer) {
 });
 
 bot.on('friend', function(steamID, EFriendRelationship) {
-	if (EFriendRelationship === 3) { // EFriendRelationship.friend
+	if (EFriendRelationship === Steam.EFriendRelationship.friend) {
 			console.log("send trade to " + steamID);
-	} else if (EFriendRelationship === 2) { // EFriendRelationship.RequestRecipient
+	} else if (EFriendRelationship === Steam.EFriendRelationship.RequestRecipient) {
 		console.log("adding " + steamID);
 		bot.addFriend(steamID);
 	} else {
