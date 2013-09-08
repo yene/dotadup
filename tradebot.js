@@ -24,21 +24,17 @@ bot.on('loggedOn', function() {
 	bot.webLogOn(function(cookies){
 		steamTrade.setCookie(cookies);
 	});
-	
 
 	steamTrade.open("76561197964515697", function() {
 		// start trade with yene
 		steamTrade.loadInventory(570, 2, function(items) {
 			console.log(items);
-
 		})
-
-
 	});
 });
 
 bot.on('sentry', function(buffer) {
-	fs.writeFile("sentry", buffer);
+	fs.writeFile('sentry', buffer);
 });
 
 bot.on('friend', function(steamID, EFriendRelationship) {
