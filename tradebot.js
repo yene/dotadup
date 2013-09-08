@@ -9,6 +9,11 @@ var webCookie = "";
 // fs.existsSync(path)#
 var sentry = fs.readFileSync("sentry");
 
+// if we've saved a server list, use it
+if (fs.existsSync('servers')) {
+  Steam.servers = JSON.parse(fs.readFileSync('servers'));
+}
+
 var bot = new Steam.SteamClient();
 bot.logOn({
   accountName: 'b337138',
@@ -38,7 +43,9 @@ bot.on('webSessionID', function(sessionID) {
   });
 });
 
-
+bot.on('servers', function(servers) {
+  fs.writeFile('servers', JSON.stringify(servers));
+});
 
 bot.on('message', function(source, message, type, chatter) {
   if (message === "") {return;}
