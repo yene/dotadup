@@ -72,6 +72,14 @@ app.post('/trade/:id', function(req, res) {
 	//res.send({id:req.params.id, data: req.body.data});
 
 	bot.addFriend(req.params.id);
+
+	// start trade
+  steamTrade.open(req.params.id, function() {
+    //add some items immediately
+    console.log("start trade with " + req.params.id);
+
+  });
+
 });
  
 app.listen(3000);
