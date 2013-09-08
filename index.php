@@ -329,7 +329,7 @@ if ($items["success"] === "false") {
 
 ?>
 	<br style="clear: both;";>
-	<button type="button" onclick="trade()">Trade Selected Items</button>
+	<button type="button" onclick="trade()">Send Trade Offer</button>
 	</section>
 	<footer class="wrapper">
 		<p>Dota 2 is a registered trademark of Valve Corporation. This site is not affiliated with Valve Corporation. All game images and names are property of Valve Corporation. <a href="http://steampowered.com/">Powered by Steam</a></p>
