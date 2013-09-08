@@ -1,7 +1,6 @@
 var Steam = require('steam');
 var fs = require('fs');
 var SteamTrade = require('steam-trade');
-var steamTrade = new SteamTrade();
 
 var webSessionID = "";
 var webCookie = "";
@@ -13,6 +12,12 @@ var sentry = fs.readFileSync("sentry");
 if (fs.existsSync('servers')) {
   Steam.servers = JSON.parse(fs.readFileSync('servers'));
 }
+
+/******************************************
+
+Steam login and friend management
+
+******************************************/
 
 var bot = new Steam.SteamClient();
 bot.logOn({
@@ -67,6 +72,67 @@ bot.on('friend', function(steamID, EFriendRelationship) {
 	}
 });
 
+bot.on('error', function(e) {
+  console.log("error: " + e.cause);
+});
+
+/******************************************
+
+Steam trade
+
+******************************************/
+
+// trade session started
+bot.on('sessionStart', function(steamID) {
+    var gift = false;
+    console.log("sessionStart with steamid " + steamID);
+    var steamTrade = new SteamTrade();
+    steamTrade.sessionID = webSessionID;
+    steamTrade.cookie = webCookie;
+    steamTrade.loadInventory(570, 2, function(result) {
+      fs.writeFile('my items', result);
+    });
+    
+    steamTrade.open(steamID, function() {
+      //add some items immediately
+    });
+
+    steamTrade.on('chatMsg', function(message) {
+      console.log("he said:" + message);
+    });
+
+    steamTrade.on('ready', function(){
+      console.log("other is ready for trade");
+      steamTrade.ready();
+      steamTrade.confirm();
+    });
+
+    steamTrade.on('end', function(result, array) {
+      console.log("trade has ended");
+    });
+
+    // isAdded:  true if an item was added, false if removed
+    steamTrade.on('offerChanged', function(isAdded, item) {
+    	var symbol = isAdded ? "+" : "-"
+      console.log("offer changed: " + symbol + item);
+
+    });
+});
+
+bot.on('tradeProposed', function(tradeID, steamID) {
+  console.log("starting trade with: "+ steamID);
+});
+
+bot.on('tradeResult', function(tradeID, tradeResponse, steamID) {
+  console.log("trade finished with: "+ steamID);
+});
+
+/******************************************
+
+The webserver which listens for trade offers
+
+******************************************/
+
 var express = require('express');
 
 var app = express();
@@ -81,11 +147,8 @@ app.post('/trade/:id', function(req, res) {
 	bot.addFriend(req.params.id);
 
 	// start trade
-  steamTrade.open(req.params.id, function() {
-    //add some items immediately
-    console.log("start trade with " + req.params.id);
-
-  });
+  bot.trade(req.params.id);
+  console.log("requseting trade with: " + req.params.id);
 
 });
  
