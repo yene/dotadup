@@ -3,6 +3,8 @@ var fs = require('fs');
 var SteamTrade = require('steam-trade');
 var steamTrade = new SteamTrade();
 
+var webSessionID = "";
+var webCookie = "";
 
 // fs.existsSync(path)#
 var sentry = fs.readFileSync("sentry");
@@ -14,27 +16,37 @@ bot.logOn({
   authCode: "KJWGW",
   shaSentryfile: sentry
 });
+
 bot.on('loggedOn', function() {
 	console.log("logged on");
 	bot.setPersonaState(Steam.EPersonaState.Online); // to display your bot's status as "Online"
 	bot.setPersonaName('Dotadup'); // to change its nickname
-
-	// test steam trade
-	steamTrade.sessionID = bot.webSessionID;
-	bot.webLogOn(function(cookies){
-		steamTrade.setCookie(cookies);
-	});
-
-	steamTrade.open("76561197964515697", function() {
-		// start trade with yene
-		steamTrade.loadInventory(570, 2, function(items) {
-			console.log(items);
-		})
-	});
 });
 
 bot.on('sentry', function(buffer) {
 	fs.writeFile('sentry', buffer);
+});
+
+bot.on('webSessionID', function(sessionID) {
+  webSessionID = sessionID;
+  console.log("webSessionID: " + webSessionID); 
+  // If you are using Steam Community (including trading), 
+  // you should call webLogOn again, since your current cookie is no longer valid.
+  bot.webLogOn(function(cookie) {
+    console.log("webCookie: " + cookie);
+    webCookie = cookie;
+  });
+});
+
+
+
+bot.on('message', function(source, message, type, chatter) {
+  if (message === "") {return;}
+  // respond to both chat room and private messages
+  console.log('Received message: ' + message);
+  if (message == 'ping') {
+    bot.sendMessage(source, 'pong', Steam.EChatEntryType.ChatMsg); // ChatMsg by default
+  }
 });
 
 bot.on('friend', function(steamID, EFriendRelationship) {
