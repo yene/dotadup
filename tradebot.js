@@ -88,7 +88,10 @@ bot.on('sessionStart', function(steamID) {
     console.log("sessionStart with steamid " + steamID);
     var steamTrade = new SteamTrade();
     steamTrade.sessionID = webSessionID;
-    steamTrade.cookie = webCookie;
+    for (var key in webCookie) {
+    	steamTrade.setCookie(webCookie[key]);
+    }
+
     steamTrade.loadInventory(570, 2, function(result) {
       fs.writeFile('my items', result);
     });
@@ -114,17 +117,18 @@ bot.on('sessionStart', function(steamID) {
     // isAdded:  true if an item was added, false if removed
     steamTrade.on('offerChanged', function(isAdded, item) {
     	var symbol = isAdded ? "+" : "-"
-      console.log("offer changed: " + symbol + item);
+      console.log("offer changed: " + symbol + JSON.stringify(item););
 
     });
 });
 
 bot.on('tradeProposed', function(tradeID, steamID) {
   console.log("starting trade with: "+ steamID);
+  bot.respondToTrade(tradeID, true);
 });
 
-bot.on('tradeResult', function(tradeID, tradeResponse, steamID) {
-  console.log("trade finished with: "+ steamID);
+bot.on('tradeResult', function(tradeID, tradeResponse, steamID) { // EEconTradeResponse.Accepted = 1
+  console.log("trade with: "+ steamID + " said " + tradeResponse);
 });
 
 /******************************************
@@ -142,13 +146,12 @@ app.post('/trade/:id', function(req, res) {
 	// http://expressjs.com/api.html#req.body
 	console.dir(req.body);
 	res.send("ok");
-	//res.send({id:req.params.id, data: req.body.data});
 
 	bot.addFriend(req.params.id);
 
 	// start trade
   bot.trade(req.params.id);
-  console.log("requseting trade with: " + req.params.id);
+  console.log("requesting trade with: " + req.params.id);
 
 });
  
