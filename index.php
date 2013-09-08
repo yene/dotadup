@@ -249,8 +249,9 @@ try {
 
 //http://steamcommunity.com/profiles/<PROFILEID>/inventory/json/753/1
 //http://steamcommunity.com/id/yene/inventory/json/570/2
+// yenes id 76561197964515697
+
 $url = "http://steamcommunity.com/profiles/" .$_SESSION['userID']. "/inventory/json/570/2";
-$url = "http://steamcommunity.com/id/Chook/inventory/json/570/2";
 
 if (isset($_GET["test"])) {
 	$url = "http://steamcommunity.com/" . $_GET["test"] . "/inventory/json/570/2";
