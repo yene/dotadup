@@ -1,6 +1,7 @@
 var Steam = require('steam');
 var fs = require('fs');
 var SteamTrade = require('steam-trade');
+var SteamOffer = require('steam-offer');
 
 var webSessionID = "";
 var webCookie = "";
@@ -129,6 +130,10 @@ bot.on('tradeProposed', function(tradeID, steamID) {
 
 bot.on('tradeResult', function(tradeID, tradeResponse, steamID) { // EEconTradeResponse.Accepted = 1
   console.log("trade with: "+ steamID + " said " + tradeResponse);
+});
+
+bot.on('tradeOffers', function(tradeCount) {
+  console.log("trade count is: "+ tradeCount);
 });
 
 /******************************************
