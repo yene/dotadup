@@ -1,4 +1,4 @@
-![screenshot](https://raw.github.com/yene/dotadup/master/screenshot.jpg)
+![screenshot](http://i.imgur.com/80hjY7C.jpg)
 
 Flow
 
