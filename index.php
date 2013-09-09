@@ -48,17 +48,18 @@ try {
 	<meta name="keywords" content="Dota 2, trade, items, dupliacte">
 	<!-- Normalize.css is a customisable CSS file that makes browsers render all elements more consistently and in line with modern standards. -->
 	<link rel="stylesheet" media="screen" href="https://raw.github.com/necolas/normalize.css/master/normalize.css">
-	 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-	 <script>
-	 $(document).ready(function(){
-		 $( ".itemBox" ).click(function () {
-		   $(this).toggleClass("selected");
-		 });
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script>
+	$(document).ready(function(){
+		$(".itemBox" ).mousedown(function(){ return false; })
+		$( ".itemBox" ).click(function () {
+			$(this).toggleClass("selected");
+		});
 
-		 $( "nav ul li" ).click(function () {
-		   $(this).toggleClass("active");
-		 });
-	 });
+		$( "nav ul li" ).click(function () {
+			$(this).toggleClass("active");
+		});
+	});
 
 		function trade() {
 			var count = 0;
@@ -166,6 +167,12 @@ try {
 			border: 1px solid #871201;
 			padding: 10px;
 			margin: 5px;
+			user-select: none;
+			-moz-user-select: none;
+			-khtml-user-select: none;
+			-webkit-user-select: none;
+			-o-user-select: none;
+			cursor: default;
 		}
 
 		.itemTitle {
@@ -182,7 +189,7 @@ try {
 			padding-top: 2px;
 			padding-bottom: 2px;
 			opacity: 0.8;
-		}
+     }
 
 		.selected {
 			border: 3px solid #EF1A0E;
