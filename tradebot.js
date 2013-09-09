@@ -14,6 +14,25 @@ if (fs.existsSync('servers')) {
   Steam.servers = JSON.parse(fs.readFileSync('servers'));
 }
 
+
+/******************************************
+
+Steam trade offer
+
+******************************************/
+function makeOffer(steamID) {
+  console.log("make offer to: " + steamID);
+  var steamOffer = new SteamOffer();
+  steamOffer.sessionID = webSessionID;
+  for (var key in webCookie) {
+    steamOffer.setCookie(webCookie[key]);
+  }
+  steamOffer.miniprofile(steamID, function(miniprofile) {
+     console.log(miniprofile);
+  });
+ 
+}
+
 /******************************************
 
 Steam login and friend management
@@ -47,6 +66,7 @@ bot.on('webSessionID', function(sessionID) {
     webCookie = cookie;
     // go online after you got the community login
     bot.setPersonaState(Steam.EPersonaState.Online); // to display your bot's status as "Online"
+    makeOffer("76561197964515697");
   });
 });
 
