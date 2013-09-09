@@ -74,6 +74,10 @@ bot.on('friend', function(steamID, EFriendRelationship) {
 	}
 });
 
+bot.on('relationships', function(steamID, EFriendRelationship) {
+  console.log(bot.friends);
+});''
+
 bot.on('error', function(e) {
   console.log("error: " + e.cause);
 });
