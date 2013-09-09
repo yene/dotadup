@@ -147,8 +147,12 @@ app.post('/trade/:id', function(req, res) {
 	console.dir('body of request: ' + req.body);
   res.send(200);
 
-  //bot.trade(req.params.id);
-  //console.log("requesting trade with: " + req.params.id);
+  var items = req.body.items.split(',');
+  var userID = req.params.id;
+
+  //bot.trade(userID);
+  //console.log("requesting trade with: " + userID);
+
 });
  
 app.listen(3000);
