@@ -63,18 +63,22 @@ try {
 		function trade() {
 			var count = 0;
 			var userID = <?=$_SESSION['userID']?>;
+			var data = new Array();
 			$( ".itemBox.selected" ).each(function( index ) {
 				count++;
-				console.log( $(this).attr("data-item-id") );
+				var itemID = $(this).attr("data-item-id");
+				data.push(itemID)
 			});
 			
 			if (count == 0) {
 				alert("Nothing selected.");
+			} else {
+				var url = "http://localhost:3000/trade/<?=$_SESSION['userID']?>";
+				var data = "items=" + data.join(",");
+				$.post(url, data);
+				alert("Trade offer sent, please accept friend request.");
 			}
-
 		}
-
-
 	 </script>
 
 
@@ -251,7 +255,7 @@ try {
 //http://steamcommunity.com/id/yene/inventory/json/570/2
 // yenes id 76561197964515697
 
-$url = "http://steamcommunity.com/profiles/" .$_SESSION['userID']. "/inventory/json/570/2";
+$url = "http://steamcommunity.com/profiles/" . $_SESSION['userID'] . "/inventory/json/570/2";
 
 if (isset($_GET["test"])) {
 	$url = "http://steamcommunity.com/" . $_GET["test"] . "/inventory/json/570/2";
