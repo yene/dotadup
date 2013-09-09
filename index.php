@@ -320,11 +320,21 @@ if ($items["success"] === "false") {
 
 	foreach ($douplicateItems as $key => $value) {
 		$image = $imageUrl . $items['rgDescriptions'][$value]['icon_url'];
+		$rarity = "";
+		$rarityColor = "";
+		foreach ($items['rgDescriptions'][$value]["tags"] as $key2 => $value2) {
+			if ($value2["internal_name"] === "Rarity_Rare") {
+				$rarity = $value2["name"];
+				$rarityColor = $value2["color"];
+				break;
+			}
+		}
 		?>
 		<div class="itemBox" style="background-image: url(<?=$image?>);" 
 			title="<?=print_r($items['rgDescriptions'][$value]['tags'], true) ?>"
 			data-item-id="<?=$value?>">
 			<p class="itemTitle"><?=$items['rgDescriptions'][$value]['name']?></p>
+			<p class="rarity" style="color: #<?=$rarityColor?>;"><?=$rarity?></p>
 		</div>
 		<?php
 	}
