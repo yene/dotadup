@@ -144,15 +144,11 @@ app.use(express.bodyParser());
 
 app.post('/trade/:id', function(req, res) {
 	// http://expressjs.com/api.html#req.body
-	console.dir(req.body);
-	res.send("ok");
+	console.dir('body of request: ' + req.body);
+  res.send(200);
 
-	bot.addFriend(req.params.id);
-
-	// start trade
-  bot.trade(req.params.id);
-  console.log("requesting trade with: " + req.params.id);
-
+  //bot.trade(req.params.id);
+  //console.log("requesting trade with: " + req.params.id);
 });
  
 app.listen(3000);
