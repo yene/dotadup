@@ -29,7 +29,6 @@ bot.logOn({
 
 bot.on('loggedOn', function() {
 	console.log("logged on");
-	bot.setPersonaState(Steam.EPersonaState.Online); // to display your bot's status as "Online"
 	bot.setPersonaName('Dotadup'); // to change its nickname
 });
 
@@ -45,6 +44,8 @@ bot.on('webSessionID', function(sessionID) {
   bot.webLogOn(function(cookie) {
     console.log("webCookie: " + cookie);
     webCookie = cookie;
+    // go online after you got the community login
+    bot.setPersonaState(Steam.EPersonaState.Online); // to display your bot's status as "Online"
   });
 });
 
@@ -116,9 +117,8 @@ bot.on('sessionStart', function(steamID) {
 
     // isAdded:  true if an item was added, false if removed
     steamTrade.on('offerChanged', function(isAdded, item) {
-    	var symbol = isAdded ? "+" : "-"
-      console.log("offer changed: " + symbol + JSON.stringify(item););
-
+    	var action = isAdded ? "added " : "removed "
+      console.log("offer changed: " + action + item.name);
     });
 });
 
