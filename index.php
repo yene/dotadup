@@ -330,7 +330,7 @@ if ($items["success"] === "false") {
 		$rarity = "";
 		$rarityColor = "";
 		foreach ($items['rgDescriptions'][$value]["tags"] as $key2 => $value2) {
-			if ($value2["internal_name"] === "Rarity_Rare") {
+			if ($value2["category"] === "Rarity") {
 				$rarity = $value2["name"];
 				$rarityColor = $value2["color"];
 				break;
