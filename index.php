@@ -262,20 +262,20 @@ try {
 //http://steamcommunity.com/id/yene/inventory/json/570/2
 // yenes id 76561197964515697
 
-$url = "http://steamcommunity.com/profiles/" . $_SESSION['userID'] . "/inventory/json/570/2";
+$url = "http://steamcommunity.com/profiles/" . $_SESSION['userID'] . "/inventory/json/570/2?trading=1";
 
 if (isset($_GET["test"])) {
-	$url = "http://steamcommunity.com/" . $_GET["test"] . "/inventory/json/570/2";
+	$url = "http://steamcommunity.com/" . $_GET["test"] . "/inventory/json/570/2?trading=1";
 }
 
 $itemJson = file_get_contents($url);
 $items = json_decode($itemJson, true);
 
 /*
-	aui_2000
-	cyborgmatt
-	Robinlee
-	Chook
+	id/aui_2000
+	id/cyborgmatt
+	id/Robinlee
+	id/Chook
 	profiles/76561197980022982
 	profiles/76561198073883598
 	id/MasterMo66/
