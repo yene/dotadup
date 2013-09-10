@@ -294,8 +294,6 @@ if ($items["success"] === "false") {
 
 	$itemWhitelist = array();
 	$itemWhitelist[] = "DOTA_WearableType_Wearable";
-	$itemWhitelist[] = "courier";
-	$itemWhitelist[] = "DOTA_WearableType_Taunt";
 
 	$itemBlackList = array();
 	$itemBlackList[] = "DOTA_OtherType";
