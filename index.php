@@ -288,6 +288,7 @@ $imageUrl = "http://cdn.steamcommunity.com/economy/image/";
 
 if ($items["success"] === "false") {
 	echo $items["Error"];
+	// TODO show message that he needs to make inventory pubilc (i think)
 } else {
 
 	$mergedItems = $items['rgInventory'];
