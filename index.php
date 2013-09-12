@@ -332,7 +332,6 @@ if ($items["success"] === "false") {
 			$image = $imageUrl . $value['icon_url'];
 			?>
 			<div class="itemBox" style="background-image: url(<?=$image?>);" 
-				title="<?=print_r($value['tags'], true) ?>"
 				data-item-id="<?=$key?>">
 				<p class="itemTitle"><?=$value['name']?></p>
 				<p class="rarity" style="color: #<?=$rarityColor?>;"><?=$rarity?></p>
