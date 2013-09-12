@@ -265,22 +265,20 @@ try {
 $url = "http://steamcommunity.com/profiles/" . $_SESSION['userID'] . "/inventory/json/570/2?trading=1";
 
 if (isset($_GET["test"])) {
+	/*
+		id/aui_2000
+		id/cyborgmatt
+		id/Robinlee
+		id/Chook
+		profiles/76561197980022982
+		profiles/76561198073883598
+		id/MasterMo66/
+	*/
 	$url = "http://steamcommunity.com/" . $_GET["test"] . "/inventory/json/570/2?trading=1";
 }
 
 $itemJson = file_get_contents($url);
 $items = json_decode($itemJson, true);
-
-/*
-	id/aui_2000
-	id/cyborgmatt
-	id/Robinlee
-	id/Chook
-	profiles/76561197980022982
-	profiles/76561198073883598
-	id/MasterMo66/
-*/
-
 
 $imageUrl = "http://cdn.steamcommunity.com/economy/image/";
 
@@ -292,58 +290,55 @@ if ($items["success"] === "false") {
 	echo $items["Error"];
 } else {
 
+	$mergedItems = $items['rgInventory'];
+
+	foreach ($mergedItems as $key => &$value) {
+		$itemID = $value["classid"] . "_" . $value["instanceid"];
+		$value = array_merge($value, $items['rgDescriptions'][$itemID]);
+	}
+
 	$itemWhitelist = array();
 	$itemWhitelist[] = "DOTA_WearableType_Wearable";
 
 	$itemBlackList = array();
 	$itemBlackList[] = "DOTA_OtherType";
 
-	$countedItems = array();
 	$douplicateItems = array();
 
 	// count items
-	foreach ($items['rgInventory'] as $key => $value) {
-
-		$id = $value["classid"] . "_" . $value["instanceid"];
+	foreach ($mergedItems as $key => $value) {
 
 		// check if item is in the white or black list (tags are checked)
+		// also get the rarity
 		$skip = TRUE;
-		foreach ($items['rgDescriptions'][$id]["tags"] as $key2 => $value2) {
+		$rarity = "";
+		$rarityColor = "";
+		foreach ($value["tags"] as $key2 => $value2) {
 			if (in_array($value2["internal_name"], $itemBlackList)) continue 2;
 			if (in_array($value2["internal_name"], $itemWhitelist)) $skip = FALSE;
+			if ($value2["category"] === "Rarity") {
+				$rarity = $value2["name"];
+				$rarityColor = $value2["color"];
+			}
 		}
 
 		if ($skip) continue;
 
-		if (array_key_exists($id, $countedItems)) {
-			$countedItems[$id] = $countedItems[$id] + 1;
-			$douplicateItems[] = $id;
+		if (!in_array($value["classid"] . "_" . $value["instanceid"], $douplicateItems)) {
+			$douplicateItems[] = $value["classid"] . "_" . $value["instanceid"];
 		} else {
-			$countedItems[$id] = 1;
+			// duplicate found
+			$image = $imageUrl . $value['icon_url'];
+			?>
+			<div class="itemBox" style="background-image: url(<?=$image?>);" 
+				title="<?=print_r($value['tags'], true) ?>"
+				data-item-id="<?=$key?>">
+				<p class="itemTitle"><?=$value['name']?></p>
+				<p class="rarity" style="color: #<?=$rarityColor?>;"><?=$rarity?></p>
+			</div>
+			<?php
 		}
 	}
-
-	foreach ($douplicateItems as $key => $value) {
-		$image = $imageUrl . $items['rgDescriptions'][$value]['icon_url'];
-		$rarity = "";
-		$rarityColor = "";
-		foreach ($items['rgDescriptions'][$value]["tags"] as $key2 => $value2) {
-			if ($value2["category"] === "Rarity") {
-				$rarity = $value2["name"];
-				$rarityColor = $value2["color"];
-				break;
-			}
-		}
-		?>
-		<div class="itemBox" style="background-image: url(<?=$image?>);" 
-			title="<?=print_r($items['rgDescriptions'][$value]['tags'], true) ?>"
-			data-item-id="<?=$value?>">
-			<p class="itemTitle"><?=$items['rgDescriptions'][$value]['name']?></p>
-			<p class="rarity" style="color: #<?=$rarityColor?>;"><?=$rarity?></p>
-		</div>
-		<?php
-	}
-
 }
 
 ?>
