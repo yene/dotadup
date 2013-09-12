@@ -20,7 +20,7 @@ if (fs.existsSync('servers')) {
 Steam trade offer
 
 ******************************************/
-function makeOffer(steamID) {
+function makeOffer(steamID, items) {
   console.log("make offer to: " + steamID);
   var steamOffer = new SteamOffer();
   steamOffer.sessionID = webSessionID;
@@ -28,7 +28,31 @@ function makeOffer(steamID) {
     steamOffer.setCookie(webCookie[key]);
   }
   steamOffer.miniprofile(steamID, function(miniprofile) {
-     console.log(miniprofile);
+    steamOffer.open(steamID, miniprofile, function() {
+      steamOffer.loadInventory('570', '2', function(myInventory) {
+        steamOffer.loadForeignInventory('570', '2', function(partnerInventory) {
+          for (var key in items) {
+            var item = items[key];
+            if(!partnerInventory.hasOwnProperty(item)){
+              console.log("has not: " + item);
+              //TODO alert me here, someone tricked the system
+            }
+          }
+
+          // filter item he already has from my list
+
+          // for each item get one of my item, with the same rarity
+
+          // if not enough just do it for the much possible
+
+        });
+
+
+      });
+      
+
+
+     })
   });
  
 }
@@ -58,15 +82,12 @@ bot.on('sentry', function(buffer) {
 
 bot.on('webSessionID', function(sessionID) {
   webSessionID = sessionID;
-  console.log("webSessionID: " + webSessionID); 
   // If you are using Steam Community (including trading), 
   // you should call webLogOn again, since your current cookie is no longer valid.
   bot.webLogOn(function(cookie) {
-    console.log("webCookie: " + cookie);
     webCookie = cookie;
     // go online after you got the community login
     bot.setPersonaState(Steam.EPersonaState.Online); // to display your bot's status as "Online"
-    makeOffer("76561197964515697");
   });
 });
 
@@ -93,10 +114,6 @@ bot.on('friend', function(steamID, EFriendRelationship) {
 		console.log(steamID + " " + EFriendRelationship);
 	}
 });
-
-bot.on('relationships', function(steamID, EFriendRelationship) {
-  console.log(bot.friends);
-});''
 
 bot.on('error', function(e) {
   console.log("error: " + e.cause);
@@ -173,15 +190,12 @@ app.use(express.bodyParser());
 
 app.post('/trade/:id', function(req, res) {
 	// http://expressjs.com/api.html#req.body
-	console.dir('body of request: ' + req.body);
   res.send(200);
 
   var items = req.body.items.split(',');
   var userID = req.params.id;
 
-  //bot.trade(userID);
-  //console.log("requesting trade with: " + userID);
-
+  makeOffer(userID, items);
 });
  
 app.listen(3000);
