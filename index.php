@@ -258,14 +258,11 @@ try {
 
 <?php
 
-//http://steamcommunity.com/profiles/<PROFILEID>/inventory/json/753/1
-//http://steamcommunity.com/id/yene/inventory/json/570/2
-// yenes id 76561197964515697
-
 $url = "http://steamcommunity.com/profiles/" . $_SESSION['userID'] . "/inventory/json/570/2?trading=1";
 
 if (isset($_GET["test"])) {
 	/*
+	  profile/76561197964515697
 		id/aui_2000
 		id/cyborgmatt
 		id/Robinlee
@@ -281,10 +278,6 @@ $itemJson = file_get_contents($url);
 $items = json_decode($itemJson, true);
 
 $imageUrl = "http://cdn.steamcommunity.com/economy/image/";
-
-// duplicate items in rgInventory have the same classid + instance id
-
-// daten sind in rgDescriptions, key ist 93975462_57949762, classid + instance id
 
 if ($items["success"] === "false") {
 	echo $items["Error"];
