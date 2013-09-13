@@ -31,15 +31,28 @@ function makeOffer(steamID, items) {
     steamOffer.open(steamID, miniprofile, function() {
       steamOffer.loadInventory('570', '2', function(myInventory) {
         steamOffer.loadForeignInventory('570', '2', function(partnerInventory) {
-          for (var key in items) {
-            var item = items[key];
-            if(!partnerInventory.hasOwnProperty(item)){
-              console.log("has not: " + item);
-              //TODO alert me here, someone tricked the system
+          // filter item he already has from my list
+          for (var key in myInventory) {
+
+            for (var key2 in items) {
+              var item = items[key2];
+              if(!partnerInventory.hasOwnProperty(item)){
+                console.log("has not: " + item);
+                //TODO alert me here, someone tricked the system
+              } else {
+                if (partnerInventory[item].classid == myInventory[key].classid && partnerInventory[item].instanceid == myInventory[key].instanceid) {
+                  console.log("we both have: " + partnerInventory[item].name);
+
+                }
+              }
+
+
             }
+
+
           }
 
-          // filter item he already has from my list
+
 
           // for each item get one of my item, with the same rarity
 
@@ -72,7 +85,6 @@ bot.logOn({
 });
 
 bot.on('loggedOn', function() {
-	console.log("logged on");
 	bot.setPersonaName('Dotadup'); // to change its nickname
 });
 
@@ -88,6 +100,7 @@ bot.on('webSessionID', function(sessionID) {
     webCookie = cookie;
     // go online after you got the community login
     bot.setPersonaState(Steam.EPersonaState.Online); // to display your bot's status as "Online"
+    console.log("online");
   });
 });
 
