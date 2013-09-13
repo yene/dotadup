@@ -7,6 +7,7 @@ TODO
 * bot accept empty offers
 * bot trade 1 rare for 2 uncommens if he does not have enough items
 * bot trade 2 uncommons for 1 rare
+* remove friend after offer is sent
 
 Flow
 
