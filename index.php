@@ -298,28 +298,24 @@ if ($items["success"] === "false") {
 		$value = array_merge($value, $items['rgDescriptions'][$itemID]);
 	}
 
-	$itemWhitelist = array();
-	$itemWhitelist[] = "DOTA_WearableType_Wearable";
-
-	$itemBlackList = array();
-	$itemBlackList[] = "DOTA_OtherType";
-
 	$douplicateItems = array();
 
-	// count items
 	foreach ($mergedItems as $key => $value) {
 
-		// check if item is in the white or black list (tags are checked)
-		// also get the rarity
+		// only show items that heroes can wear, are not from another type, and are Rare, Uncommon or common
 		$skip = TRUE;
 		$rarity = "";
 		$rarityColor = "";
 		foreach ($value["tags"] as $key2 => $value2) {
-			if (in_array($value2["internal_name"], $itemBlackList)) continue 2;
-			if (in_array($value2["internal_name"], $itemWhitelist)) $skip = FALSE;
+			if ($value2["internal_name"] === "DOTA_OtherType") continue 2;
+			if ($value2["internal_name"] === "DOTA_WearableType_Wearable") $skip = FALSE;
 			if ($value2["category"] === "Rarity") {
 				$rarity = $value2["name"];
 				$rarityColor = $value2["color"];
+
+				if (! ($rarity === "Rare" || $rarity === "Uncommon" || $rarity === "Common")) {
+					continue 2;
+				}
 			}
 		}
 
