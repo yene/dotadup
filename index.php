@@ -78,7 +78,7 @@ try {
 				var url = "http://localhost:3000/trade/<?=$_SESSION['userID']?>";
 				var data = "items=" + data.join(",");
 				$.post(url, data);
-				alert("Trade offer sent, please accept friend request.");
+				alert("Trade offer is on the way.\nPlease accept the friend request and then the offer.");
 			}
 		}
 	 </script>
