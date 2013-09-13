@@ -13,6 +13,7 @@ try {
         if(isset($_GET['login'])) {
             $openid->identity = 'http://steamcommunity.com/openid';
             header('Location: ' . $openid->authUrl());
+            exit();
         }
     } elseif($openid->mode == 'cancel') {
         echo 'User has canceled authentication!';
@@ -27,8 +28,8 @@ try {
 
     		$_SESSION['name'] = $userData["response"]["players"][0]["personaname"];
     		$_SESSION['avatar'] = $userData["response"]["players"][0]["avatarmedium"];;
-
-
+    		header('Location: http://localhost/dotadup');
+    		exit();
     	} else {
     		// not logged in
     	}
