@@ -30,41 +30,28 @@ function makeOffer(steamID, items) {
   steamOffer.miniprofile(steamID, function(miniprofile) {
     steamOffer.open(steamID, miniprofile, function() {
       steamOffer.loadInventory('570', '2', function(myInventory) {
+        shuffle(myInventory);
+
         steamOffer.loadForeignInventory('570', '2', function(partnerInventory) {
-          // filter item he already has from my list
-          for (var key in myInventory) {
+          for (var inventoryKey in myInventory) {
+            var myItem = myInventory[inventoryKey];
 
-            for (var key2 in items) {
-              var item = items[key2];
-              if(!partnerInventory.hasOwnProperty(item)){
-                console.log("has not: " + item);
-                //TODO alert me here, someone tricked the system
-              } else {
-                if (partnerInventory[item].classid == myInventory[key].classid && partnerInventory[item].instanceid == myInventory[key].instanceid) {
-                  console.log("we both have: " + partnerInventory[item].name);
+            
+            // don't offer item he owns
+            for (var key in partnerInventory) {
+              var partnerItem = partnerInventory[key];
 
-                }
+              if (partnerItem.classid === myItem.classid && partnerItem.instanceid === myItem.instanceid) {
+                myInventory.splice(inventoryKey, 1);
+                continue;
               }
-
-
             }
-
-
           }
 
 
-
-          // for each item get one of my item, with the same rarity
-
-          // if not enough just do it for the much possible
-
+          
         });
-
-
       });
-      
-
-
      })
   });
  
@@ -213,3 +200,43 @@ app.post('/trade/:id', function(req, res) {
  
 app.listen(3000);
 console.log('Listening on port 3000...');
+
+
+/******************************************
+
+Helper functions
+
+******************************************/
+
+function getRarity(anArray) {
+  var rarity = "";
+  for (var tagKey in anArray.tags) {
+    if (anArray.tags[tagKey].category === "Rarity") {
+      rarity = anArray.tags[tagKey].name;
+    }
+  }
+  return rarity;
+}
+
+function shuffle(array) {
+  var currentIndex = array.length
+    , temporaryValue
+    , randomIndex
+    ;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
