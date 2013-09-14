@@ -234,6 +234,10 @@ app.post('/trade/:id', function(req, res) {
   offers[userID] = items;
 });
  
+app.get('/', function(req, res){
+  res.send('hello world');
+});
+
 app.listen(3000);
 console.log('Listening on port 3000...');
 
