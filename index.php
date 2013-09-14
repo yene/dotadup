@@ -299,12 +299,12 @@ if ($items["success"] === "false") {
 	foreach ($mergedItems as $key => $value) {
 
 		// only show items that heroes can wear, are not from another type, and are Rare, Uncommon or common
-		$skip = TRUE;
+		$isWearable = false;
 		$rarity = "";
 		$rarityColor = "";
 		foreach ($value["tags"] as $key2 => $value2) {
 			if ($value2["internal_name"] === "DOTA_OtherType") continue 2;
-			if ($value2["internal_name"] === "DOTA_WearableType_Wearable") $skip = FALSE;
+			if ($value2["internal_name"] === "DOTA_WearableType_Wearable") $isWearable = true;
 			if ($value2["category"] === "Rarity") {
 				$rarity = $value2["name"];
 				$rarityColor = $value2["color"];
@@ -315,7 +315,7 @@ if ($items["success"] === "false") {
 			}
 		}
 
-		if ($skip) continue;
+		if (!$isWearable) continue;
 
 		if (!in_array($value["classid"] . "_" . $value["instanceid"], $douplicateItems)) {
 			$douplicateItems[] = $value["classid"] . "_" . $value["instanceid"];
