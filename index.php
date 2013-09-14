@@ -1,6 +1,7 @@
 <?php
 session_start();
 require "apikey.php";
+$host = ($_SERVER['SERVER_ADDR'] === "::1") ? "localhost" : "dotadup.com";
 
 # Logging in with Google accounts requires setting special identity, so this example shows how to do it.
 # The returned Claimed ID will contain the user's 64-bit SteamID. 
@@ -8,7 +9,7 @@ require "apikey.php";
 require 'openid.php';
 try {
     # Change 'localhost' to your domain name.
-    $openid = new LightOpenID('localhost');
+    $openid = new LightOpenID($host);
     if(!$openid->mode) {
         if(isset($_GET['login'])) {
             $openid->identity = 'http://steamcommunity.com/openid';
@@ -19,7 +20,8 @@ try {
         echo 'User has canceled authentication!';
     } else {
     	if ($openid->validate()) {
-    		$userID = explode("/", $openid->identity)[5];
+    		$userID = explode("/", $openid->identity);
+    		$userID = $userID[5];
     		$url = "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=" .$apikey. "&steamids=" . $userID;
     		$_SESSION['userID'] = $userID;
 
@@ -28,7 +30,7 @@ try {
 
     		$_SESSION['name'] = $userData["response"]["players"][0]["personaname"];
     		$_SESSION['avatar'] = $userData["response"]["players"][0]["avatarmedium"];;
-    		header('Location: http://localhost/dotadup');
+    		header('Location: http://' . $host);
     		exit();
     	} else {
     		// not logged in
@@ -75,7 +77,7 @@ try {
 			if (count == 0) {
 				alert("Nothing selected.");
 			} else {
-				var url = "http://localhost:3000/trade/<?=$_SESSION['userID']?>";
+				var url = "http://<?=$host?>:3000/trade/<?=$_SESSION['userID']?>";
 				var data = "items=" + data.join(",");
 				$.post(url, data);
 				alert("Trade offer is on the way.\nPlease accept the friend request and then the offer.");
