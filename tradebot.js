@@ -14,6 +14,8 @@ if (fs.existsSync('servers')) {
   Steam.servers = JSON.parse(fs.readFileSync('servers'));
 }
 
+var offers = {};
+
 
 /******************************************
 
@@ -64,6 +66,8 @@ function makeOffer(steamID, items) {
                 console.log("found " + myItem.name + " for " + offeredItem.name);
                 me_assets.push({"appid":570,"contextid":2,"amount":1,"assetid":myItem.id});
                 them_assets.push({"appid":570,"contextid":2,"amount":1,"assetid":offeredItem.id});
+                // remove item from the item pool
+                myInventory.splice(myItemKey, 1);
                 break;
               }
             }
@@ -74,7 +78,7 @@ function makeOffer(steamID, items) {
 
           steamOffer.sendOffer(me_assets, them_assets, 'Thank you for using dotadup.com', function(partnerInventory) {
             console.log("offer sent");
-            // TODO maybe remove friend here
+            bot.removeFriend(steamID);
           });
         });
       });
@@ -131,13 +135,18 @@ bot.on('message', function(source, message, type, chatter) {
 });
 
 bot.on('friend', function(steamID, EFriendRelationship) {
-	if (EFriendRelationship === Steam.EFriendRelationship.friend) {
+  //  makeOffer(userID, items);
+
+	if (EFriendRelationship === Steam.EFriendRelationship.Friend) {
 			console.log("send trade to " + steamID);
+      if (offers.hasOwnProperty(steamID)) {
+        console.log("there is a trade waiting for you");
+        makeOffer(steamID, offers[steamID]);
+        delete offers[steamID];
+      }
 	} else if (EFriendRelationship === Steam.EFriendRelationship.RequestRecipient) {
 		console.log("adding " + steamID);
-		bot.addFriend(steamID);
-	} else {
-		console.log(steamID + " " + EFriendRelationship);
+		//bot.addFriend(steamID);
 	}
 });
 
@@ -221,7 +230,8 @@ app.post('/trade/:id', function(req, res) {
   var items = req.body.items.split(',');
   var userID = req.params.id;
 
-  makeOffer(userID, items);
+  bot.addFriend(userID);
+  offers[userID] = items;
 });
  
 app.listen(3000);
