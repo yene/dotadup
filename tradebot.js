@@ -47,28 +47,35 @@ function makeOffer(steamID, items) {
             }
           }
 
+          var me_assets = new Array();
+          var them_assets = new Array();
+
           for (var offeredItemKey in items) {
             var item = items[offeredItemKey];
             var offeredItem = partnerInventory[item];
             var offeredItemRarity = steamOffer.getRarity(offeredItem);
-            //console.log("looking for item: " + offeredItem.name + " with rarity " + offeredItemRarity);
 
             // find a match by rarity
             for (var myItemKey in myInventory) {
               var myItem = myInventory[myItemKey];
               var myItemRarity = steamOffer.getRarity(myItem);
 
-              //console.log("checking if item" + myItem.name + " with rarity " + myItem.rarity);
-
               if (myItemRarity === offeredItemRarity) {
                 console.log("found " + myItem.name + " for " + offeredItem.name);
+                me_assets.push({"appid":570,"contextid":2,"amount":1,"assetid":myItem.id});
+                them_assets.push({"appid":570,"contextid":2,"amount":1,"assetid":offeredItem.id});
                 break;
               }
             }
           }
 
+          console.log(me_assets);
+          console.log(them_assets);
 
-
+          steamOffer.sendOffer(me_assets, them_assets, 'Thank you for using dotadup.com', function(partnerInventory) {
+            console.log("offer sent");
+            // TODO maybe remove friend here
+          });
         });
       });
      })
