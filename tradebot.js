@@ -36,8 +36,7 @@ function makeOffer(steamID, items) {
           for (var inventoryKey in myInventory) {
             var myItem = myInventory[inventoryKey];
 
-            
-            // don't offer item he owns
+            // remove items he already has from my inventory
             for (var key in partnerInventory) {
               var partnerItem = partnerInventory[key];
 
@@ -48,8 +47,28 @@ function makeOffer(steamID, items) {
             }
           }
 
+          for (var offeredItemKey in items) {
+            var item = items[offeredItemKey];
+            var offeredItem = partnerInventory[item];
+            var offeredItemRarity = steamOffer.getRarity(offeredItem);
+            //console.log("looking for item: " + offeredItem.name + " with rarity " + offeredItemRarity);
 
-          
+            // find a match by rarity
+            for (var myItemKey in myInventory) {
+              var myItem = myInventory[myItemKey];
+              var myItemRarity = steamOffer.getRarity(myItem);
+
+              //console.log("checking if item" + myItem.name + " with rarity " + myItem.rarity);
+
+              if (myItemRarity === offeredItemRarity) {
+                console.log("found " + myItem.name + " for " + offeredItem.name);
+                break;
+              }
+            }
+          }
+
+
+
         });
       });
      })
@@ -208,16 +227,6 @@ Helper functions
 
 ******************************************/
 
-function getRarity(anArray) {
-  var rarity = "";
-  for (var tagKey in anArray.tags) {
-    if (anArray.tags[tagKey].category === "Rarity") {
-      rarity = anArray.tags[tagKey].name;
-    }
-  }
-  return rarity;
-}
-
 function shuffle(array) {
   var currentIndex = array.length
     , temporaryValue
@@ -240,3 +249,6 @@ function shuffle(array) {
   return array;
 }
 
+function readableObject(anObject) {
+  return JSON.stringify(anObject, null, 4);
+}
