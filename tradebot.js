@@ -60,6 +60,10 @@ function makeOffer(steamID, items) {
             // find a match by rarity
             for (var myItemKey in myInventory) {
               var myItem = myInventory[myItemKey];
+              if (typeof myItem === "undefined") { // this item is already taken
+                continue;
+              }
+
               var myItemRarity = steamOffer.getRarity(myItem);
 
               if (myItemRarity === offeredItemRarity) {
@@ -67,7 +71,7 @@ function makeOffer(steamID, items) {
                 me_assets.push({"appid":570,"contextid":2,"amount":1,"assetid":myItem.id});
                 them_assets.push({"appid":570,"contextid":2,"amount":1,"assetid":offeredItem.id});
                 // remove item from the item pool
-                myInventory.splice(myItemKey, 1);
+                delete myInventory[myItemKey];
                 break;
               }
             }
