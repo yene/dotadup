@@ -37,13 +37,16 @@ function makeOffer(steamID, items) {
         steamOffer.loadForeignInventory('570', '2', function(partnerInventory) {
           for (var inventoryKey in myInventory) {
             var myItem = myInventory[inventoryKey];
+            if (typeof myItem === "undefined") {
+              continue;
+            }
 
             // remove items he already has from my inventory
             for (var key in partnerInventory) {
               var partnerItem = partnerInventory[key];
 
               if (partnerItem.classid === myItem.classid && partnerItem.instanceid === myItem.instanceid) {
-                myInventory.splice(inventoryKey, 1);
+                delete myInventory[inventoryKey];
                 continue;
               }
             }
