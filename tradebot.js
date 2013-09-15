@@ -50,6 +50,28 @@ function makeOffer(steamID, items) {
                 continue;
               }
             }
+
+            // filter my items
+            // only show items that heroes can wear, are not from another type, and are Rare, Uncommon or common
+            var isWearable = false;
+            for (var tagKey in myItem.tags) {
+              if (myItem.tags[tagKey].category === "Rarity") {
+                rarity = myItem.tags[tagKey].name;
+                if (!(rarity === "Rare" || rarity === "Uncommon" || rarity === "Common")) {
+                  delete myInventory[inventoryKey];
+                  break;
+                }
+              }
+              if (myItem.tags[tagKey].internal_name === "DOTA_OtherType") {
+                delete myInventory[inventoryKey];
+                break;
+              }
+              if (myItem.tags[tagKey].internal_name === "DOTA_WearableType_Wearable") isWearable = true;
+            }
+
+            if (!isWearable) {
+              delete myInventory[inventoryKey];
+            }
           }
 
           var me_assets = new Array();
@@ -80,11 +102,8 @@ function makeOffer(steamID, items) {
             }
           }
 
-          console.log(me_assets);
-          console.log(them_assets);
-
           steamOffer.sendOffer(me_assets, them_assets, 'Thank you for using dotadup.com', function(partnerInventory) {
-            console.log("offer sent");
+            console.log("offer sent to: " + steamID);
             bot.removeFriend(steamID);
           });
         });
@@ -153,7 +172,7 @@ bot.on('friend', function(steamID, EFriendRelationship) {
       }
 	} else if (EFriendRelationship === Steam.EFriendRelationship.RequestRecipient) {
 		console.log("adding " + steamID);
-		//bot.addFriend(steamID);
+		bot.addFriend(steamID);
 	}
 });
 
