@@ -1,6 +1,7 @@
 ![screenshot](http://i.imgur.com/80hjY7C.jpg)
 
 TODO
+* show done trades from http://steamcommunity.com/profiles/76561198080209564/tradeoffers/sent/?history=1
 * correct error messages
 * cheat prevention
 * option to donate items, bot will make a request without items
