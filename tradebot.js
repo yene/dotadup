@@ -31,86 +31,82 @@ function makeOffer(steamID, items) {
   for (var key in webCookie) {
     steamOffer.setCookie(webCookie[key]);
   }
-  steamOffer.miniprofile(steamID, function(miniprofile) {
-    steamOffer.open(steamID, miniprofile, function() {
-      steamOffer.loadInventory('570', '2', function(myInventory) {
-        shuffle(myInventory);
+  steamOffer.loadInventory('570', '2', function(myInventory) {
+    shuffle(myInventory);
+    steamOffer.loadForeignInventory('570', '2', steamID, function(partnerInventory) {
 
-        steamOffer.loadForeignInventory('570', '2', function(partnerInventory) {
-          for (var inventoryKey in myInventory) {
-            var myItem = myInventory[inventoryKey];
-            if (typeof myItem === "undefined") {
-              continue;
-            }
+      for (var inventoryKey in myInventory) {
+        var myItem = myInventory[inventoryKey];
+        if (typeof myItem === "undefined") {
+          continue;
+        }
 
-            // remove items he already has from my inventory
-            for (var key in partnerInventory) {
-              var partnerItem = partnerInventory[key];
+        // remove items he already has from my inventory
+        for (var key in partnerInventory) {
+          var partnerItem = partnerInventory[key];
 
-              if (partnerItem.classid === myItem.classid && partnerItem.instanceid === myItem.instanceid) {
-                delete myInventory[inventoryKey];
-                continue;
-              }
-            }
+          if (partnerItem.classid === myItem.classid && partnerItem.instanceid === myItem.instanceid) {
+            delete myInventory[inventoryKey];
+            continue;
+          }
+        }
 
-            // filter my items
-            // only show items that heroes can wear, are not from another type, and are Rare, Uncommon or common
-            var isWearable = false;
-            for (var tagKey in myItem.tags) {
-              if (myItem.tags[tagKey].category === "Rarity") {
-                rarity = myItem.tags[tagKey].name;
-                if (!(rarity === "Rare" || rarity === "Uncommon" || rarity === "Common")) {
-                  delete myInventory[inventoryKey];
-                  break;
-                }
-              }
-              if (myItem.tags[tagKey].internal_name === "DOTA_OtherType") {
-                delete myInventory[inventoryKey];
-                break;
-              }
-              if (myItem.tags[tagKey].internal_name === "DOTA_WearableType_Wearable") isWearable = true;
-            }
-
-            if (!isWearable) {
+        // filter my items
+        // only show items that heroes can wear, are not from another type, and are Rare, Uncommon or common
+        var isWearable = false;
+        for (var tagKey in myItem.tags) {
+          if (myItem.tags[tagKey].category === "Rarity") {
+            rarity = myItem.tags[tagKey].name;
+            if (!(rarity === "Rare" || rarity === "Uncommon" || rarity === "Common")) {
               delete myInventory[inventoryKey];
+              break;
             }
           }
+          if (myItem.tags[tagKey].internal_name === "DOTA_OtherType") {
+            delete myInventory[inventoryKey];
+            break;
+          }
+          if (myItem.tags[tagKey].internal_name === "DOTA_WearableType_Wearable") isWearable = true;
+        }
 
-          var me_assets = new Array();
-          var them_assets = new Array();
+        if (!isWearable) {
+          delete myInventory[inventoryKey];
+        }
+      }
 
-          for (var offeredItemKey in items) {
-            var item = items[offeredItemKey];
-            var offeredItem = partnerInventory[item];
-            var offeredItemRarity = steamOffer.getRarity(offeredItem);
+      var me_assets = new Array();
+      var them_assets = new Array();
 
-            // find a match by rarity
-            for (var myItemKey in myInventory) {
-              var myItem = myInventory[myItemKey];
-              if (typeof myItem === "undefined") { // this item is already taken
-                continue;
-              }
+      for (var offeredItemKey in items) {
+        var item = items[offeredItemKey];
+        var offeredItem = partnerInventory[item];
+        var offeredItemRarity = steamOffer.getRarity(offeredItem);
 
-              var myItemRarity = steamOffer.getRarity(myItem);
-
-              if (myItemRarity === offeredItemRarity) {
-                if (debug) console.log("found " + myItem.name + " for " + offeredItem.name);
-                me_assets.push({"appid":570,"contextid":2,"amount":1,"assetid":myItem.id});
-                them_assets.push({"appid":570,"contextid":2,"amount":1,"assetid":offeredItem.id});
-                // remove item from the item pool
-                delete myInventory[myItemKey];
-                break;
-              }
-            }
+        // find a match by rarity
+        for (var myItemKey in myInventory) {
+          var myItem = myInventory[myItemKey];
+          if (typeof myItem === "undefined") { // this item is already taken
+            continue;
           }
 
-          steamOffer.sendOffer(me_assets, them_assets, 'Thank you for using dotadup.com', function(partnerInventory) {
-            if (debug) console.log("offer sent to: " + steamID);
-            bot.removeFriend(steamID);
-          });
-        });
+          var myItemRarity = steamOffer.getRarity(myItem);
+
+          if (myItemRarity === offeredItemRarity) {
+            if (debug) console.log("found " + myItem.name + " for " + offeredItem.name);
+            me_assets.push({"appid":570,"contextid":2,"amount":1,"assetid":myItem.id});
+            them_assets.push({"appid":570,"contextid":2,"amount":1,"assetid":offeredItem.id});
+            // remove item from the item pool
+            delete myInventory[myItemKey];
+            break;
+          }
+        }
+      }
+
+      steamOffer.sendOffer(me_assets, them_assets, 'Thank you for using dotadup.com', steamID,function(partnerInventory) {
+        if (debug) console.log("offer sent to: " + steamID);
+        bot.removeFriend(steamID);
       });
-     })
+    })
   });
 }
 
@@ -121,20 +117,16 @@ function makeDonateOffer(steamID, items) {
   for (var key in webCookie) {
     steamOffer.setCookie(webCookie[key]);
   }
-  steamOffer.miniprofile(steamID, function(miniprofile) {
-    steamOffer.open(steamID, miniprofile, function() {
-      var them_assets = new Array();
+  var them_assets = new Array();
 
-      for (var offeredItemKey in items) {
-        var item = items[offeredItemKey];
-        them_assets.push({"appid":570,"contextid":2,"amount":1,"assetid":item});
-      }
+  for (var offeredItemKey in items) {
+    var item = items[offeredItemKey];
+    them_assets.push({"appid":570,"contextid":2,"amount":1,"assetid":item});
+  }
 
-      steamOffer.sendOffer(new Array(), them_assets, 'Thank you for donating, this site would not work without you.', function(partnerInventory) {
-        if (debug) console.log("donate sent to: " + steamID);
-        bot.removeFriend(steamID);
-      });
-    });
+  steamOffer.sendOffer(new Array(), them_assets, 'Thank you for donating, this site would not work without you.', steamID, function(partnerInventory) {
+    if (debug) console.log("donate sent to: " + steamID);
+    bot.removeFriend(steamID);
   });
 }
 
@@ -302,7 +294,6 @@ app.get('/', function(req, res){
 
 app.listen(3000);
 if (debug) console.log('Listening on port 3000...');
-
 
 /******************************************
 
