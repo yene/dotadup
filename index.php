@@ -22,14 +22,7 @@ try {
     	if ($openid->validate()) {
     		$userID = explode("/", $openid->identity);
     		$userID = $userID[5];
-    		$url = "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=" .$apikey. "&steamids=" . $userID;
     		$_SESSION['userID'] = $userID;
-
-    		$userDataJson = file_get_contents($url);
-    		$userData = json_decode($userDataJson, true);
-
-    		$_SESSION['name'] = $userData["response"]["players"][0]["personaname"];
-    		$_SESSION['avatar'] = $userData["response"]["players"][0]["avatarmedium"];;
     		header('Location: http://' . $host);
     		exit();
     	} else {
@@ -237,25 +230,25 @@ try {
 ?>
 				<a href="?login"><img src="images/sits_small.png"></a>
 <?php
-	} else {
-?>
-		<?=$_SESSION['name'] ?>  <img src="<?=$_SESSION['avatar'] ?>">
-<?php
 	}
 ?>
 
 			</div>
 		</div>
+		<!--
 		<nav class="wrapper">
 			<ul>
 				<li class="active"><a href="#">Trade</a></li>
+				
 				<li><a href="#">Trade History</a></li>
 				<li><a href="#">Help</a></li>
 				<li><a href="#">Donate</a></li>
 				<li><a href="#">Settings</a></li>
+			
 			</ul>
-		</nav>
+		</nav>	-->
 	</header>
+
 	<section class="wrapper">
 		<h1>Your duplicate Items.</h1><p>Please select the wan you want to trade.</p>
 
