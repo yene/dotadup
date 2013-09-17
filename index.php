@@ -78,7 +78,7 @@ try {
 				var url = "http://<?=$host?>:3000/trade/<?=$_SESSION['userID']?>";
 				var data = "items=" + data.join(",");
 				$.post(url, data);
-				alert("Trade offer is on the way.\nPlease accept the friend request and then the offer.");
+				alert("Please accept the friend request and then the offer.");
 			}
 		}
 
@@ -98,7 +98,7 @@ try {
 				var url = "http://<?=$host?>:3000/donate/<?=$_SESSION['userID']?>";
 				var data = "items=" + data.join(",");
 				$.post(url, data);
-				alert("Trade offer is on the way.\nPlease accept the friend request and then the offer.");
+				alert("Please accept the friend request and then the offer.");
 			}
 		}
 <?php
@@ -185,34 +185,37 @@ try {
 		}
 
 		.itemBox {
+			position: relative;
+			border-radius: 10px;
 			float: left;
 			width: 256px;
 			height: 170px;
 			border: 1px solid #871201;
-			padding: 10px;
 			margin: 5px;
 			user-select: none;
 			-moz-user-select: none;
 			-khtml-user-select: none;
 			-webkit-user-select: none;
 			-o-user-select: none;
+			overflow: hidden;
 			cursor: default;
 		}
 
-		.itemTitle {
+		.rarity {
 			text-align: center;
-			top: 90px;
-			position: relative;
+			position: absolute;
+			bottom: 0px;
 			display: table;
-    	margin: 0 auto;
 			font-size: 20px;
 			background-color: #FFF0E9;
-			border-radius: 10px;
 			padding-left: 8px;
 			padding-right: 8px;
 			padding-top: 2px;
 			padding-bottom: 2px;
 			opacity: 0.8;
+			width: 100%;
+			font-weight: bold;
+			margin: 0;
      }
 
 		.selected {
@@ -262,7 +265,7 @@ try {
 <body>
 	<header>
 		<div class="wrapper">
-			<h1 class="title" style="display:inline;">Dotadup <span class="slogan">away with the dupes</span</h1>
+			<h1 class="title" style="display:inline;">Dotadup <span class="slogan"></span></h1>
 		</div>
 		<!--
 		<nav class="wrapper">
@@ -281,13 +284,13 @@ try {
 <?php
 	if (!isset($_SESSION['userID'])) {
 ?>
-	<h1>Select your duplicate Items and we send you a Steam Trade Offer.</h1>
-	<p>But first please sign in through Steam.</p>
+	<h1>Select your duplicate items and we send you a Steam Trade Offer.</h1>
+	<p>For every item selected we try to offer you another one with the same rarity.</p>
 	<p><a href="?login"><img src="images/sits_small.png"></a></p>
 <?php
 	} else {
 ?>
-		<h1>Select your duplicate Items and we send you a Steam Trade Offer.</h1>
+		<h1>Select your duplicate items and we send you a Steam Trade Offer.</h1>
 		<p>For every item selected we try to offer you another one with the same rarity.</p>
 
 <?php
@@ -326,6 +329,7 @@ try {
 		}
 
 		$douplicateItems = array();
+		$foundDuplicate = false;
 
 		foreach ($mergedItems as $key => $value) {
 
@@ -352,24 +356,30 @@ try {
 				$douplicateItems[] = $value["classid"] . "_" . $value["instanceid"];
 			} else {
 				// duplicate found
+				$foundDuplicate = true;
 				$image = $imageUrl . $value['icon_url'];
 				?>
 				<div class="itemBox" style="background-image: url(<?=$image?>);" 
-					data-item-id="<?=$key?>">
-					<p class="itemTitle"><?=$value['name']?></p>
+					data-item-id="<?=$key?>" title="<?=$value['name']?>">
 					<p class="rarity" style="color: #<?=$rarityColor?>;"><?=$rarity?></p>
 				</div>
 				<?php
 			}
 		}
-	}
-?>
-	<br style="clear: both;";>
-	<button type="button" onclick="trade()">Send me a Steam Trade Offer</button>
-	or 
-	<button type="button" onclick="donate()">I want to donate the items</button>
 
+		if (!$foundDuplicate) {
+			echo "<p>Sorry you don't have any duplicates</p>";
+		} else {
+?>
+	<br style="clear: both;">
+	<p>
+	<button type="button" onclick="trade()">Send me a Steam Trade Offer for the selected items</button>
+	or 
+	<button type="button" onclick="donate()">I want to donate the selected items</button>
+	<p>
 <?php
+		}
+	}
 }
 ?>
 
