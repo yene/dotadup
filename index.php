@@ -208,6 +208,13 @@ try {
 		               0 20px 20px rgba(0,0,0,.15);
 		}
 
+		.slogan {
+			text-shadow: none;
+			font-size: 16px;
+			margin-left: 20px;
+			font-style: italic;
+		}
+
 		.username {
 			font-size: 30px;
 		}
@@ -227,17 +234,7 @@ try {
 <body>
 	<header>
 		<div class="wrapper">
-			<h1 class="title" style="display:inline;">Dotadup</h1>
-			<div class="username" style="display:inline; float: right;">
-<?php
-	if (!isset($_SESSION['userID'])) {
-?>
-				<a href="?login"><img src="images/sits_small.png"></a>
-<?php
-	}
-?>
-
-			</div>
+			<h1 class="title" style="display:inline;">Dotadup <span class="slogan">away with the dupes</span</h1>
 		</div>
 		<!--
 		<nav class="wrapper">
@@ -252,92 +249,105 @@ try {
 			</ul>
 		</nav>	-->
 	</header>
-
 	<section class="wrapper">
-		<h1>Your duplicate Items.</h1><p>Please select the wan you want to trade.</p>
+<?php
+	if (!isset($_SESSION['userID'])) {
+?>
+	<h1>Select your duplicate Items and we send you a Steam Trade Offer.</h1>
+	<p>But first please sign in through Steam.</p>
+	<p><a href="?login"><img src="images/sits_small.png"></a></p>
+<?php
+	} else {
+?>
+		<h1>Select your duplicate Items and we send you a Steam Trade Offer.</h1>
+		<p>For every item selected we try to offer you another one with the same rarity.</p>
 
 <?php
 
-$url = "http://steamcommunity.com/profiles/" . $_SESSION['userID'] . "/inventory/json/570/2?trading=1";
+	$url = "http://steamcommunity.com/profiles/" . $_SESSION['userID'] . "/inventory/json/570/2?trading=1";
 
-if (isset($_GET["test"])) {
-	/*
-	  profile/76561197964515697
-		id/aui_2000
-		id/cyborgmatt
-		id/Robinlee
-		id/Chook
-		profiles/76561197980022982
-		profiles/76561198073883598
-		id/MasterMo66/
-	*/
-	$url = "http://steamcommunity.com/" . $_GET["test"] . "/inventory/json/570/2?trading=1";
-}
-
-$itemJson = file_get_contents($url);
-$items = json_decode($itemJson, true);
-
-$imageUrl = "http://cdn.steamcommunity.com/economy/image/";
-
-if ($items["success"] === "false") {
-	echo $items["Error"];
-	// TODO show message that he needs to make inventory pubilc (i think)
-} else {
-
-	$mergedItems = $items['rgInventory'];
-
-	foreach ($mergedItems as $key => &$value) {
-		$itemID = $value["classid"] . "_" . $value["instanceid"];
-		$value = array_merge($value, $items['rgDescriptions'][$itemID]);
+	if (isset($_GET["test"])) {
+		/*
+		  profile/76561197964515697
+			id/aui_2000
+			id/cyborgmatt
+			id/Robinlee
+			id/Chook
+			profiles/76561197980022982
+			profiles/76561198073883598
+			id/MasterMo66/
+		*/
+		$url = "http://steamcommunity.com/" . $_GET["test"] . "/inventory/json/570/2?trading=1";
 	}
 
-	$douplicateItems = array();
+	$itemJson = file_get_contents($url);
+	$items = json_decode($itemJson, true);
 
-	foreach ($mergedItems as $key => $value) {
+	$imageUrl = "http://cdn.steamcommunity.com/economy/image/";
 
-		// only show items that heroes can wear, are not from another type, and are Rare, Uncommon or common
-		$isWearable = false;
-		$rarity = "";
-		$rarityColor = "";
-		foreach ($value["tags"] as $key2 => $value2) {
-			if ($value2["internal_name"] === "DOTA_OtherType") continue 2;
-			if ($value2["internal_name"] === "DOTA_WearableType_Wearable") $isWearable = true;
-			if ($value2["category"] === "Rarity") {
-				$rarity = $value2["name"];
-				$rarityColor = $value2["color"];
+	if ($items["success"] === "false") {
+		echo $items["Error"];
+		// TODO show message that he needs to make inventory pubilc (i think)
+	} else {
 
-				if (! ($rarity === "Rare" || $rarity === "Uncommon" || $rarity === "Common")) {
-					continue 2;
+		$mergedItems = $items['rgInventory'];
+
+		foreach ($mergedItems as $key => &$value) {
+			$itemID = $value["classid"] . "_" . $value["instanceid"];
+			$value = array_merge($value, $items['rgDescriptions'][$itemID]);
+		}
+
+		$douplicateItems = array();
+
+		foreach ($mergedItems as $key => $value) {
+
+			// only show items that heroes can wear, are not from another type, and are Rare, Uncommon or common
+			$isWearable = false;
+			$rarity = "";
+			$rarityColor = "";
+			foreach ($value["tags"] as $key2 => $value2) {
+				if ($value2["internal_name"] === "DOTA_OtherType") continue 2;
+				if ($value2["internal_name"] === "DOTA_WearableType_Wearable") $isWearable = true;
+				if ($value2["category"] === "Rarity") {
+					$rarity = $value2["name"];
+					$rarityColor = $value2["color"];
+
+					if (! ($rarity === "Rare" || $rarity === "Uncommon" || $rarity === "Common")) {
+						continue 2;
+					}
 				}
 			}
-		}
 
-		if (!$isWearable) continue;
+			if (!$isWearable) continue;
 
-		if (!in_array($value["classid"] . "_" . $value["instanceid"], $douplicateItems)) {
-			$douplicateItems[] = $value["classid"] . "_" . $value["instanceid"];
-		} else {
-			// duplicate found
-			$image = $imageUrl . $value['icon_url'];
-			?>
-			<div class="itemBox" style="background-image: url(<?=$image?>);" 
-				data-item-id="<?=$key?>">
-				<p class="itemTitle"><?=$value['name']?></p>
-				<p class="rarity" style="color: #<?=$rarityColor?>;"><?=$rarity?></p>
-			</div>
-			<?php
+			if (!in_array($value["classid"] . "_" . $value["instanceid"], $douplicateItems)) {
+				$douplicateItems[] = $value["classid"] . "_" . $value["instanceid"];
+			} else {
+				// duplicate found
+				$image = $imageUrl . $value['icon_url'];
+				?>
+				<div class="itemBox" style="background-image: url(<?=$image?>);" 
+					data-item-id="<?=$key?>">
+					<p class="itemTitle"><?=$value['name']?></p>
+					<p class="rarity" style="color: #<?=$rarityColor?>;"><?=$rarity?></p>
+				</div>
+				<?php
+			}
 		}
 	}
-}
-
 ?>
 	<br style="clear: both;";>
 	<button type="button" onclick="trade()">Send me a Steam Trade Offer</button>
 	or 
 	<button type="button" onclick="trade()">I want to donate the items</button>
+
+<?php
+}
+?>
+
 	</section>
 	<footer class="wrapper">
-		<p>Dota 2 is a registered trademark of Valve Corporation. This site is not affiliated with Valve Corporation. All game images and names are property of Valve Corporation. <a href="http://steampowered.com/">Powered by Steam</a></p>
+		<p>Dota 2 is a registered trademark of Valve Corporation. This site is not affiliated with Valve Corporation. All game images and names are property of Valve Corporation. We took all measures to make this site russian proof.</p>
 	</footer>
 </body>
 </html>
