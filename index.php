@@ -1,7 +1,7 @@
 <?php
 session_start();
 require "apikey.php";
-$host = ($_SERVER['SERVER_ADDR'] === "::1") ? "localhost" : "dotadup.com";
+$host = ($_SERVER['SERVER_ADDR'] === "::1" || $_SERVER['SERVER_ADDR'] === "127.0.0.1" ) ? "localhost" : "dotadup.com";
 
 # Logging in with Google accounts requires setting special identity, so this example shows how to do it.
 # The returned Claimed ID will contain the user's 64-bit SteamID. 
