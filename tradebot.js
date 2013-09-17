@@ -16,6 +16,7 @@ if (fs.existsSync('servers')) {
 
 var offers = {};
 var donates = {};
+var debug = false;
 
 
 /******************************************
@@ -24,7 +25,7 @@ Steam trade offer
 
 ******************************************/
 function makeOffer(steamID, items) {
-  console.log("make offer to: " + steamID);
+  if (debug) console.log("make offer to: " + steamID);
   var steamOffer = new SteamOffer();
   steamOffer.sessionID = webSessionID;
   for (var key in webCookie) {
@@ -93,7 +94,7 @@ function makeOffer(steamID, items) {
               var myItemRarity = steamOffer.getRarity(myItem);
 
               if (myItemRarity === offeredItemRarity) {
-                console.log("found " + myItem.name + " for " + offeredItem.name);
+                if (debug) console.log("found " + myItem.name + " for " + offeredItem.name);
                 me_assets.push({"appid":570,"contextid":2,"amount":1,"assetid":myItem.id});
                 them_assets.push({"appid":570,"contextid":2,"amount":1,"assetid":offeredItem.id});
                 // remove item from the item pool
@@ -104,7 +105,7 @@ function makeOffer(steamID, items) {
           }
 
           steamOffer.sendOffer(me_assets, them_assets, 'Thank you for using dotadup.com', function(partnerInventory) {
-            console.log("offer sent to: " + steamID);
+            if (debug) console.log("offer sent to: " + steamID);
             bot.removeFriend(steamID);
           });
         });
@@ -114,7 +115,7 @@ function makeOffer(steamID, items) {
 }
 
 function makeDonateOffer(steamID, items) {
-  console.log("make donate offer to: " + steamID);
+  if (debug) console.log("make donate offer to: " + steamID);
   var steamOffer = new SteamOffer();
   steamOffer.sessionID = webSessionID;
   for (var key in webCookie) {
@@ -130,7 +131,7 @@ function makeDonateOffer(steamID, items) {
       }
 
       steamOffer.sendOffer(new Array(), them_assets, 'Thank you for donating, this site would not work without you.', function(partnerInventory) {
-        console.log("donate sent to: " + steamID);
+        if (debug) console.log("donate sent to: " + steamID);
         bot.removeFriend(steamID);
       });
     });
@@ -178,7 +179,7 @@ bot.on('servers', function(servers) {
 bot.on('message', function(source, message, type, chatter) {
   if (message === "") {return;}
   // respond to both chat room and private messages
-  console.log('Received message: ' + message);
+  if (debug) console.log('Received message: ' + message);
   if (message == 'ping') {
     bot.sendMessage(source, 'pong', Steam.EChatEntryType.ChatMsg); // ChatMsg by default
   }
@@ -186,18 +187,18 @@ bot.on('message', function(source, message, type, chatter) {
 
 bot.on('friend', function(steamID, EFriendRelationship) {
 	if (EFriendRelationship === Steam.EFriendRelationship.Friend) {
-			console.log("send trade to " + steamID);
+			if (debug) console.log("send trade to " + steamID);
       if (offers.hasOwnProperty(steamID)) {
-        console.log("there is a trade waiting for you");
+        if (debug) console.log("there is a trade waiting for you");
         makeOffer(steamID, offers[steamID]);
         delete offers[steamID];
       } else if (donates.hasOwnProperty(steamID)) {
-        console.log("there is a donate waiting for you");
+        if (debug) console.log("there is a donate waiting for you");
         makeDonateOffer(steamID, donates[steamID]);
         delete donates[steamID];
       }
 	} else if (EFriendRelationship === Steam.EFriendRelationship.RequestRecipient) {
-		console.log("adding " + steamID);
+		if (debug) console.log("adding " + steamID);
 		bot.addFriend(steamID);
 	}
 });
@@ -215,7 +216,7 @@ Steam trade
 // trade session started
 bot.on('sessionStart', function(steamID) {
     var gift = false;
-    console.log("sessionStart with steamid " + steamID);
+    if (debug) console.log("sessionStart with steamid " + steamID);
     var steamTrade = new SteamTrade();
     steamTrade.sessionID = webSessionID;
     for (var key in webCookie) {
@@ -231,37 +232,37 @@ bot.on('sessionStart', function(steamID) {
     });
 
     steamTrade.on('chatMsg', function(message) {
-      console.log("he said:" + message);
+      if (debug) console.log("he said:" + message);
     });
 
     steamTrade.on('ready', function(){
-      console.log("other is ready for trade");
+      if (debug) console.log("other is ready for trade");
       steamTrade.ready();
       steamTrade.confirm();
     });
 
     steamTrade.on('end', function(result, array) {
-      console.log("trade has ended");
+      if (debug) console.log("trade has ended");
     });
 
     // isAdded:  true if an item was added, false if removed
     steamTrade.on('offerChanged', function(isAdded, item) {
     	var action = isAdded ? "added " : "removed "
-      console.log("offer changed: " + action + item.name);
+      if (debug) console.log("offer changed: " + action + item.name);
     });
 });
 
 bot.on('tradeProposed', function(tradeID, steamID) {
-  console.log("starting trade with: "+ steamID);
+  if (debug) console.log("starting trade with: "+ steamID);
   bot.respondToTrade(tradeID, true);
 });
 
 bot.on('tradeResult', function(tradeID, tradeResponse, steamID) { // EEconTradeResponse.Accepted = 1
-  console.log("trade with: "+ steamID + " said " + tradeResponse);
+  if (debug) console.log("trade with: "+ steamID + " said " + tradeResponse);
 });
 
 bot.on('tradeOffers', function(tradeCount) {
-  console.log("trade count is: "+ tradeCount);
+  if (debug) console.log("trade count is: "+ tradeCount);
 });
 
 /******************************************
@@ -300,7 +301,7 @@ app.get('/', function(req, res){
 });
 
 app.listen(3000);
-console.log('Listening on port 3000...');
+if (debug) console.log('Listening on port 3000...');
 
 
 /******************************************
