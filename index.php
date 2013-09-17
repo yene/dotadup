@@ -44,6 +44,8 @@ try {
 	<meta name="keywords" content="Dota 2, trade, items, dupliacte">
 	<!-- Normalize.css is a customisable CSS file that makes browsers render all elements more consistently and in line with modern standards. -->
 	<link rel="stylesheet" media="screen" href="https://raw.github.com/necolas/normalize.css/master/normalize.css">
+	<link rel="icon" type="image/png" href="icon.png">
+	<link rel="shortcut icon" href="favicon.ico">
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 	<script>
 	$(document).ready(function(){
@@ -57,6 +59,9 @@ try {
 		});
 	});
 
+<?php
+	if (isset($_SESSION['userID'])) {
+?>
 		function trade() {
 			var count = 0;
 			var userID = <?=$_SESSION['userID']?>;
@@ -76,6 +81,9 @@ try {
 				alert("Trade offer is on the way.\nPlease accept the friend request and then the offer.");
 			}
 		}
+<?php
+}
+?>
 	 </script>
 
 
