@@ -15,6 +15,7 @@ if (fs.existsSync('servers')) {
 }
 
 var offers = {};
+var donates = {};
 
 
 /******************************************
@@ -110,7 +111,30 @@ function makeOffer(steamID, items) {
       });
      })
   });
- 
+}
+
+function makeDonateOffer(steamID, items) {
+  console.log("make donate offer to: " + steamID);
+  var steamOffer = new SteamOffer();
+  steamOffer.sessionID = webSessionID;
+  for (var key in webCookie) {
+    steamOffer.setCookie(webCookie[key]);
+  }
+  steamOffer.miniprofile(steamID, function(miniprofile) {
+    steamOffer.open(steamID, miniprofile, function() {
+      var them_assets = new Array();
+
+      for (var offeredItemKey in items) {
+        var item = items[offeredItemKey];
+        them_assets.push({"appid":570,"contextid":2,"amount":1,"assetid":item});
+      }
+
+      steamOffer.sendOffer(new Array(), them_assets, 'Thank you for donating, this site would not work without you.', function(partnerInventory) {
+        console.log("donate sent to: " + steamID);
+        bot.removeFriend(steamID);
+      });
+    });
+  });
 }
 
 /******************************************
@@ -161,14 +185,16 @@ bot.on('message', function(source, message, type, chatter) {
 });
 
 bot.on('friend', function(steamID, EFriendRelationship) {
-  //  makeOffer(userID, items);
-
 	if (EFriendRelationship === Steam.EFriendRelationship.Friend) {
 			console.log("send trade to " + steamID);
       if (offers.hasOwnProperty(steamID)) {
         console.log("there is a trade waiting for you");
         makeOffer(steamID, offers[steamID]);
         delete offers[steamID];
+      } else if (donates.hasOwnProperty(steamID)) {
+        console.log("there is a donate waiting for you");
+        makeDonateOffer(steamID, donates[steamID]);
+        delete donates[steamID];
       }
 	} else if (EFriendRelationship === Steam.EFriendRelationship.RequestRecipient) {
 		console.log("adding " + steamID);
@@ -250,7 +276,6 @@ var app = express();
 app.use(express.bodyParser());
 
 app.post('/trade/:id', function(req, res) {
-	// http://expressjs.com/api.html#req.body
   res.send(200);
 
   var items = req.body.items.split(',');
@@ -258,6 +283,16 @@ app.post('/trade/:id', function(req, res) {
 
   bot.addFriend(userID);
   offers[userID] = items;
+});
+
+app.post('/donate/:id', function(req, res) {
+  res.send(200);
+
+  var items = req.body.items.split(',');
+  var userID = req.params.id;
+
+  bot.addFriend(userID);
+  donates[userID] = items;
 });
  
 app.get('/', function(req, res){

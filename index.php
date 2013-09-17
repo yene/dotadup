@@ -81,6 +81,26 @@ try {
 				alert("Trade offer is on the way.\nPlease accept the friend request and then the offer.");
 			}
 		}
+
+		function donate() {
+			var count = 0;
+			var userID = <?=$_SESSION['userID']?>;
+			var data = new Array();
+			$( ".itemBox.selected" ).each(function( index ) {
+				count++;
+				var itemID = $(this).attr("data-item-id");
+				data.push(itemID)
+			});
+			
+			if (count == 0) {
+				alert("Nothing selected.");
+			} else {
+				var url = "http://<?=$host?>:3000/donate/<?=$_SESSION['userID']?>";
+				var data = "items=" + data.join(",");
+				$.post(url, data);
+				alert("Trade offer is on the way.\nPlease accept the friend request and then the offer.");
+			}
+		}
 <?php
 }
 ?>
@@ -347,7 +367,7 @@ try {
 	<br style="clear: both;";>
 	<button type="button" onclick="trade()">Send me a Steam Trade Offer</button>
 	or 
-	<button type="button" onclick="trade()">I want to donate the items</button>
+	<button type="button" onclick="donate()">I want to donate the items</button>
 
 <?php
 }
