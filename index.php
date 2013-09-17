@@ -7,6 +7,11 @@ $host = ($_SERVER['SERVER_ADDR'] === "::1" || $_SERVER['SERVER_ADDR'] === "127.0
 # The returned Claimed ID will contain the user's 64-bit SteamID. 
 # The Claimed ID format is: http://steamcommunity.com/openid/id/<steamid>
 require 'openid.php';
+
+if (isset($_POST['steamid']) && strlen($_POST['steamid']) == 17 ) {
+	$_SESSION['userID'] = $_POST['steamid'];
+}
+
 try {
     # Change 'localhost' to your domain name.
     $openid = new LightOpenID($host);
@@ -284,9 +289,12 @@ try {
 <?php
 	if (!isset($_SESSION['userID'])) {
 ?>
+<form method="post">
 	<h1>Select your duplicate items and we send you a Steam Trade Offer.</h1>
 	<p>For every item selected we try to offer you another one with the same rarity.</p>
-	<p><a href="?login"><img src="images/sits_small.png"></a></p>
+	<p><a href="?login"><img src="images/sits_small.png" style="vertical-align:middle"> </a> or <input placeholder="   Enter your steam ID" style="vertical-align:middle" name="steamid" type="text" size="18" maxlength="18">
+	</p>
+</form>
 <?php
 	} else {
 ?>
