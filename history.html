@@ -1,0 +1,1580 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Steam Community :: Trade Offers</title>
+	<link href="http://cdn.steamcommunity.com/public/shared/css/buttons.css?v=2377138494" rel="stylesheet" type="text/css" >
+<link href="http://cdn.steamcommunity.com/public/shared/css/shared_global.css?v=98446147" rel="stylesheet" type="text/css" >
+<link href="http://cdn.steamcommunity.com/public/css/globalv2.css?v=1921357905" rel="stylesheet" type="text/css" >
+<link href="http://cdn.steamcommunity.com/public/css/skin_1/economy.css?v=2940618123" rel="stylesheet" type="text/css" >
+<link href="http://cdn.steamcommunity.com/public/css/skin_1/profilev2.css?v=3386317380" rel="stylesheet" type="text/css" >
+<link href="http://cdn.steamcommunity.com/public/css/skin_1/profile_tradeoffers.css?v=102169244" rel="stylesheet" type="text/css" >
+<link href="http://cdn.steamcommunity.com/public/css/skin_1/header.css?v=3049246318" rel="stylesheet" type="text/css" >
+	<script type="text/javascript" src="http://cdn.steamcommunity.com/public/javascript/prototype-1.7.js?v=823774213&amp;l=english"></script>
+<script type="text/javascript" src="http://cdn.steamcommunity.com/public/javascript/scriptaculous/scriptaculous.js?load=effects,controls,slider,dragdrop&amp;v=1393810642&amp;l=english"></script>
+<script type="text/javascript" src="http://cdn.steamcommunity.com/public/javascript/global.js?v=154721721&amp;l=english"></script>
+<script type="text/javascript" src="http://cdn.steamcommunity.com/public/javascript/jquery-1.8.3.min.js?v=4280843230&amp;l=english"></script>
+<script type="text/javascript" src="http://cdn.steamcommunity.com/public/shared/javascript/tooltip.js?v=480196276&amp;l=english"></script>
+<script type="text/javascript" src="http://cdn.steamcommunity.com/public/shared/javascript/shared_global.js?v=4099327159&amp;l=english"></script>
+<script type="text/javascript">$J = jQuery.noConflict();
+if ( typeof JSON != 'object' || !JSON.stringify || !JSON.parse ) { document.write( "<scr" + "ipt type=\"text\/javascript\" src=\"http:\/\/cdn.steamcommunity.com\/public\/javascript\/json2.js?v=3840410576&amp;l=english\"><\/script>\n" ); };
+</script><script type="text/javascript" src="http://cdn.steamcommunity.com/public/javascript/profile.js?v=3915941204&amp;l=english"></script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-33779068-1']);
+  _gaq.push(['_setCustomVar', 1, 'Logged In', 'true', 2]);
+  _gaq.push(['_setCustomVar', 2, 'Client Type', 'External', 2]);
+  _gaq.push(['_setCustomVar', 3, 'Cntrlr', 'profiles', 3]);
+  _gaq.push(['_setCustomVar', 4, 'Method', "profiles\/tradeoffers", 3]);
+  _gaq.push(['_setDomainName', 'steamcommunity.com']);
+  _gaq.push(['_trackPageview']);
+  _gaq.push(['_setSessionCookieTimeout', 900000]);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</head>
+<script type="text/javascript">
+function OnTradeOfferAccepted( tradeofferid, tradeid )
+{
+	// called by trade offer window when a trade is accepted
+	AddTradeOfferBanner( tradeofferid, 'Trade Accepted!', true );
+}
+</script>
+<body class="flat_page">
+<!-- header bar, contains info browsing user if logged in -->
+<div id="global_header">
+	<div class="content">
+	
+		<div class="logo">
+			<span id="logo_holder">
+				<a href="http://store.steampowered.com/">
+					<img src="http://cdn.steamcommunity.com/public/images/header/globalheader_logo.png" width="176" height="44" border="0" alt="Steam Logo" />
+				</a>
+			</span>
+			<!--[if lt IE 7]>
+			<style type="text/css">
+			#logo_holder img { filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0); }
+			#logo_holder { display: inline-block; width: 176px; height: 44px; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://cdn.steamcommunity.com/public/images/header/globalheader_logo.png'); }
+			</style>
+			<![endif]-->
+		</div>
+
+		<div style="position: absolute; left: 200px;" id="supernav">
+	<a class="menuitem supernav" href="http://store.steampowered.com/" data-tooltip-content="
+		<a class=&quot;submenuitem&quot; href=&quot;http://store.steampowered.com/&quot;>Featured</a>
+		<a class=&quot;submenuitem&quot; href=&quot;http://store.steampowered.com/news/&quot;>News</a>
+		<a class=&quot;submenuitem&quot; href=&quot;http://store.steampowered.com/recommended/&quot;>Recommended</a>
+		<a class=&quot;submenuitem&quot; href=&quot;http://steamcommunity.com/my/wishlist/&quot;>Wishlist</a>
+		<a class=&quot;submenuitem&quot; href=&quot;http://store.steampowered.com/stats/&quot;>STATS</a>
+	">
+		STORE	</a>
+
+
+	<a class="menuitem supernav" style="display: block" href="http://steamcommunity.com/" data-tooltip-content="
+					<a class=&quot;submenuitem&quot; href=&quot;http://steamcommunity.com/&quot;>Home</a>
+					<a class=&quot;submenuitem&quot; href=&quot;http://steamcommunity.com/discussions/&quot;>DISCUSSIONS</a>
+					<a class=&quot;submenuitem&quot; href=&quot;http://steamcommunity.com/workshop/&quot;>Workshop</a>
+					<a class=&quot;submenuitem&quot; href=&quot;http://steamcommunity.com/greenlight/&quot;>Greenlight</a>
+					<a class=&quot;submenuitem&quot; href=&quot;http://steamcommunity.com/market/&quot;>Market</a>
+													">
+
+		Community	</a>
+
+	
+
+			<a class="menuitem supernav username" href="http://steamcommunity.com/profiles/76561198080209564/home/" data-tooltip-content="
+			<a class=&quot;submenuitem&quot; href=&quot;http://steamcommunity.com/profiles/76561198080209564/home/&quot;>Activity</a>
+			<a class=&quot;submenuitem&quot; href=&quot;http://steamcommunity.com/profiles/76561198080209564/&quot;>Profile</a>
+			<a class=&quot;submenuitem&quot; href=&quot;http://steamcommunity.com/profiles/76561198080209564/friends/&quot;>Friends</a>
+			<a class=&quot;submenuitem&quot; href=&quot;http://steamcommunity.com/profiles/76561198080209564/groups/&quot;>Groups</a>
+			<a class=&quot;submenuitem&quot; href=&quot;http://steamcommunity.com/profiles/76561198080209564/screenshots/&quot;>Content</a>
+			<a class=&quot;submenuitem&quot; href=&quot;http://steamcommunity.com/profiles/76561198080209564/badges/&quot;>Badges</a>
+			<a class=&quot;submenuitem&quot; href=&quot;http://steamcommunity.com/profiles/76561198080209564/inventory/&quot;>Inventory</a>
+		">
+			<span class="menuitem_new">NEW</span>
+			Dotadup		</a>
+	
+	<a class="menuitem" href="http://store.steampowered.com/about/">
+		ABOUT	</a>
+
+	<a class="menuitem" href="http://support.steampowered.com/">
+		SUPPORT	</a>
+</div>
+<script type="text/javascript">
+	jQuery(document).ready(function($) { 
+		$('.tooltip').tooltip();
+		$('.supernav').tooltip({'location':'bottom', 'tooltipClass': 'supernav_content', 'offsetY':-4, 'offsetX': 1, 'horizontalSnap': 4, 'tooltipParent': '#supernav', 'correctForScreenSize': false});
+	});
+</script>		<div id="global_actions">
+							<div class="user_avatar">
+					<div class="playerAvatar online">
+						<a href="http://steamcommunity.com/profiles/76561198080209564"><img id="headerUserAvatarIcon" src="http://media.steampowered.com/steamcommunity/public/images/avatars/a0/a0ba3cd16ad135fd6b9280d0a8e4bef505cd61a9.jpg" alt=""></a>
+					</div>
+				</div>
+						<div id="global_action_menu">
+
+				<div class="header_installsteam_btn header_installsteam_btn_gray">
+					<div class="header_installsteam_btn_leftcap"></div>
+					<div class="header_installsteam_btn_rightcap"></div>
+					<a class="header_installsteam_btn_content" href="http://store.steampowered.com/about/">
+						Install Steam					</a>
+				</div>
+									<!-- notification inbox area -->
+										<div id="header_notification_area">
+								<div id="header_notification_link" class="header_notification_btn header_notification_empty" onclick="ShowMenu( this, 'header_notification_dropdown', 'right' );">
+		</div>
+		<div class="popup_block_new" id="header_notification_dropdown" style="display: none;">
+		<div class="popup_body popup_menu">
+						<a class="popup_menu_item header_notification_comments " href="http://steamcommunity.com/profiles/76561198080209564/commentnotifications/">
+				<span class="notification_icon"></span>0 new comments			</a>
+			<div class="header_notification_dropdown_seperator"></div>
+						<a class="popup_menu_item header_notification_items " href="http://steamcommunity.com/profiles/76561198080209564/inventory/">
+				<span class="notification_icon"></span>0 new items in your inventory			</a>
+			<div class="header_notification_dropdown_seperator"></div>
+						<a class="popup_menu_item header_notification_invites " href="http://steamcommunity.com/profiles/76561198080209564/home/invites/">
+				<span class="notification_icon"></span>0 new invites			</a>
+			<div class="header_notification_dropdown_seperator"></div>
+						<a class="popup_menu_item header_notification_gifts " href="http://steamcommunity.com/profiles/76561198080209564/inventory/#pending_gifts">
+				<span class="notification_icon"></span>0 new gifts			</a>
+			<div class="header_notification_dropdown_seperator"></div>
+						<a class="popup_menu_item header_notification_offlinemessages " href="#" onclick="LaunchWebChat(); HideMenu( 'header_notification_link', 'header_notification_dropdown' ); ">
+				<span class="notification_icon"></span>0 unread chat messages			</a>
+					</div>
+	</div>
+					</div>
+
+					<span class="pulldown global_action_link" id="account_pulldown" onclick="ShowMenu( this, 'account_dropdown', 'right' );">b337138's account</span>
+					<div class="popup_block" id="account_dropdown" style="display: none;">
+						<div class="shadow_ul"></div><div class="shadow_top"></div><div class="shadow_ur"></div><div class="shadow_left"></div><div class="shadow_right"></div><div class="shadow_bl"></div><div class="shadow_bottom"></div><div class="shadow_br"></div>						<div class="popup_body popup_menu shadow_content">
+							<a class="popup_menu_item" href="https://steamcommunity.com/login/logout">LogOut</a>
+							<a class="popup_menu_item" href="http://store.steampowered.com/account/">Account details</a>
+							<span class="popup_menu_item" id="account_language_pulldown">Change language</span>
+							<div class="popup_block" id="language_dropdown" style="display: none;">
+								<div class="shadow_ul"></div><div class="shadow_top"></div><div class="shadow_ur"></div><div class="shadow_left"></div><div class="shadow_right"></div><div class="shadow_bl"></div><div class="shadow_bottom"></div><div class="shadow_br"></div>								<div class="popup_body popup_menu shadow_content">
+																													<a class="popup_menu_item tight" href="?l=bulgarian">Български (Bulgarian)</a>
+																													<a class="popup_menu_item tight" href="?l=czech">čeština (Czech)</a>
+																													<a class="popup_menu_item tight" href="?l=danish">Dansk (Danish)</a>
+																													<a class="popup_menu_item tight" href="?l=dutch">Nederlands (Dutch)</a>
+																																							<a class="popup_menu_item tight" href="?l=finnish">Suomi (Finnish)</a>
+																													<a class="popup_menu_item tight" href="?l=french">Français (French)</a>
+																													<a class="popup_menu_item tight" href="?l=german">Deutsch (German)</a>
+																													<a class="popup_menu_item tight" href="?l=greek">Ελληνικά (Greek)</a>
+																													<a class="popup_menu_item tight" href="?l=hungarian">Magyar (Hungarian)</a>
+																													<a class="popup_menu_item tight" href="?l=italian">Italiano (Italian)</a>
+																													<a class="popup_menu_item tight" href="?l=japanese">日本語 (Japanese)</a>
+																													<a class="popup_menu_item tight" href="?l=koreana">한국어 (Korean)</a>
+																													<a class="popup_menu_item tight" href="?l=norwegian">Norsk (Norwegian)</a>
+																													<a class="popup_menu_item tight" href="?l=polish">Polski (Polish)</a>
+																													<a class="popup_menu_item tight" href="?l=portuguese">Português (Portuguese)</a>
+																													<a class="popup_menu_item tight" href="?l=brazilian">Português-Brasil (Portuguese-Brazil)</a>
+																													<a class="popup_menu_item tight" href="?l=romanian">Română (Romanian)</a>
+																													<a class="popup_menu_item tight" href="?l=russian">Русский (Russian)</a>
+																													<a class="popup_menu_item tight" href="?l=schinese">简体中文 (Simplified Chinese)</a>
+																													<a class="popup_menu_item tight" href="?l=spanish">Español (Spanish)</a>
+																													<a class="popup_menu_item tight" href="?l=swedish">Svenska (Swedish)</a>
+																													<a class="popup_menu_item tight" href="?l=tchinese">繁體中文 (Traditional Chinese)</a>
+																													<a class="popup_menu_item tight" href="?l=thai">ไทย (Thai)</a>
+																													<a class="popup_menu_item tight" href="?l=turkish">Türkçe (Turkish)</a>
+																		<a class="popup_menu_item tight" href="http://translation.steampowered.com" target="_blank">Help us translate Steam</a>
+								</div>
+							</div>
+							<a class="popup_menu_item" href="http://steamcommunity.com/profiles/76561198080209564">View profile</a>
+													</div>
+					</div>
+					<script type="text/javascript">
+						RegisterFlyout( 'account_language_pulldown', 'language_dropdown', 'leftsubmenu', 'bottomsubmenu' );
+					</script>
+							</div>
+		</div>
+		
+		
+		
+	</div>
+
+</div>
+
+<div id="modalBG" style="display: none"></div>
+<script type="text/javascript">
+	g_sessionID = "NDMwODM0Njcx";
+	g_steamID = "76561198080209564";
+	$J( InitMiniprofileHovers );
+	$J( InitEmoticonHovers );
+
+	$J( function() { InitEconomyHovers( "<link href=\"http:\/\/cdn.steamcommunity.com\/public\/css\/skin_1\/economy.css?v=2940618123\" rel=\"stylesheet\" type=\"text\/css\" >\n", "<script type=\"text\/javascript\" src=\"http:\/\/cdn.steamcommunity.com\/public\/javascript\/economy.js?v=595853174&amp;l=english\"><\/script>\n" );});</script><!-- /header bar -->
+
+<div class="pagecontent no_header profile_subpage_general">
+	<div class="profile_small_header_bg">
+	<div class="profile_small_header_texture">
+
+		<a href="http://steamcommunity.com/profiles/76561198080209564">
+			<div class="profile_small_header_avatar">
+				<div class="playerAvatar medium online">
+					<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/a0/a0ba3cd16ad135fd6b9280d0a8e4bef505cd61a9_medium.jpg">
+				</div>
+			</div>
+		</a>
+		<div class="profile_small_header_text">
+			<span class="profile_small_header_name"><a class="whiteLink" href="http://steamcommunity.com/profiles/76561198080209564">Dotadup</a></span>
+							<span class="profile_small_header_arrow">&raquo;</span>
+				<a class="whiteLink"  href="http://steamcommunity.com/profiles/76561198080209564/inventory/"><span class="profile_small_header_location">Item Inventory</span></a>
+							<span class="profile_small_header_arrow">&raquo;</span>
+				<a class="whiteLink"  href="http://steamcommunity.com/profiles/76561198080209564/tradeoffers/"><span class="profile_small_header_location">Trade Offers</span></a>
+					</div>
+			</div>
+</div>	<div class="maincontent">
+				<div class="profile_leftcol">
+			
+					<div class="tradeoffer" id="tradeofferid_427386">
+												<div class="tradeoffer_header">
+							You offered yene F*AWESOME a trade:						</div>
+												<div class="tradeoffer_items_ctn  inactive">
+														<div class="tradeoffer_items primary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/profiles/76561198080209564" data-miniprofile="119943836">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/a0/a0ba3cd16ad135fd6b9280d0a8e4bef505cd61a9.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									You offered:								</div>
+								<div class="tradeoffer_item_list">
+																			<div class="trade_item " style="border-color: #D2D2D2; " data-economy-item="570/2/1000690776/76561198080209564">
+											<img src="http://cdn.steamcommunity.com/economy/image/d0L39Af1Vka9CWY96t3yLM8OPUVDhVgGace1Jw47uou-ScAPXukQVB3QesPMva6i1wlmAE6aWAJvzLI1Dy2tgbEL2RRM4REeHZF2wY7xoKDVDzlBHM4EA23RuBkQeuGNsFbCFVn4B1UKlnjexc3_4IkffAEcnUUPbcbuJBd7qo3tRYUDEbRXCEDHfJiUq_jjlkJ4BhiSQF44jawoRw==/96fx96f">
+										</div>
+																			<div class="trade_item " style="" data-economy-item="classinfo/570/93971769/57949762">
+											<img src="http://cdn.steamcommunity.com/economy/image/class/570/93971769/96fx96f?language=english">
+										</div>
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+															<div class="tradeoffer_items_banner accepted">
+									Trade Accepted!								</div>
+														<div class="tradeoffer_items secondary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/id/yene" data-miniprofile="4249969">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/cc/ccb301444d77f74a563e0e568cb7cc1b160abb1c.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									For yene F*AWESOME's:								</div>
+								<div class="tradeoffer_item_list">
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+						</div>
+						<div class="tradeoffer_footer">
+																					<div style="clear: right;"></div>
+						</div>
+					</div>
+					<div class="tradeoffer_rule"></div>
+				
+					<div class="tradeoffer" id="tradeofferid_411472">
+												<div class="tradeoffer_header">
+							You offered DeepThought a trade:						</div>
+													<div class="tradeoffer_message">
+								"Thank you for using dotadup.com"
+							</div>
+												<div class="tradeoffer_items_ctn  inactive">
+														<div class="tradeoffer_items primary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/profiles/76561198080209564" data-miniprofile="119943836">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/a0/a0ba3cd16ad135fd6b9280d0a8e4bef505cd61a9.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									You offered:								</div>
+								<div class="tradeoffer_item_list">
+																			<div class="trade_item " style="" data-economy-item="classinfo/570/73632559">
+											<img src="http://cdn.steamcommunity.com/economy/image/class/570/73632559/96fx96f?language=english">
+										</div>
+																			<div class="trade_item " style="" data-economy-item="classinfo/570/177621493/57949762">
+											<img src="http://cdn.steamcommunity.com/economy/image/class/570/177621493/96fx96f?language=english">
+										</div>
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+															<div class="tradeoffer_items_banner accepted">
+									Trade Accepted!								</div>
+														<div class="tradeoffer_items secondary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/profiles/76561197965194632" data-miniprofile="4928904">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/38/38bed6ff00f402cad91586f074a1b74683f0ad18.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									For DeepThought's:								</div>
+								<div class="tradeoffer_item_list">
+																			<div class="trade_item " style="" data-economy-item="classinfo/570/87638748">
+											<img src="http://cdn.steamcommunity.com/economy/image/class/570/87638748/73fx73f?language=english">
+										</div>
+																			<div class="trade_item " style="" data-economy-item="classinfo/570/93966791">
+											<img src="http://cdn.steamcommunity.com/economy/image/class/570/93966791/73fx73f?language=english">
+										</div>
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+						</div>
+						<div class="tradeoffer_footer">
+																					<div style="clear: right;"></div>
+						</div>
+					</div>
+					<div class="tradeoffer_rule"></div>
+				
+					<div class="tradeoffer" id="tradeofferid_368126">
+												<div class="tradeoffer_header">
+							You offered yene F*AWESOME a trade:						</div>
+													<div class="tradeoffer_message">
+								"Thank you for donating, this site would not work without you."
+							</div>
+												<div class="tradeoffer_items_ctn  inactive">
+														<div class="tradeoffer_items primary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/profiles/76561198080209564" data-miniprofile="119943836">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/a0/a0ba3cd16ad135fd6b9280d0a8e4bef505cd61a9.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									You offered:								</div>
+								<div class="tradeoffer_item_list">
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+															<div class="tradeoffer_items_banner accepted">
+									Trade Accepted!								</div>
+														<div class="tradeoffer_items secondary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/id/yene" data-miniprofile="4249969">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/cc/ccb301444d77f74a563e0e568cb7cc1b160abb1c.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									For yene F*AWESOME's:								</div>
+								<div class="tradeoffer_item_list">
+																			<div class="trade_item " style="" data-economy-item="classinfo/570/93975462/57949762">
+											<img src="http://cdn.steamcommunity.com/economy/image/class/570/93975462/73fx73f?language=english">
+										</div>
+																			<div class="trade_item " style="border-color: #D2D2D2; " data-economy-item="570/2/16294103/76561197964515697">
+											<img src="http://cdn.steamcommunity.com/economy/image/2YwaGbIND_jS_fU2j_bXEGHA0Kj2fQG4BjMmLGsQn7cQhy3i6xFJ6nIk6ciploueeceL7ftiAbwAOCE-agaIvR_FNPn5GUigYmPuwqzMhJpsxouvqTNeug0IJywoDo6gBYMw6LJBDLp3abvG9d3T3j2Mx-H-YBnjU2R8LHNSiOFFjGnuqk1fuidrucGhl5qAbg==/73fx73f">
+										</div>
+																			<div class="trade_item " style="" data-economy-item="classinfo/570/93972171/57949762">
+											<img src="http://cdn.steamcommunity.com/economy/image/class/570/93972171/73fx73f?language=english">
+										</div>
+																			<div class="trade_item " style="" data-economy-item="classinfo/570/124470650/57949762">
+											<img src="http://cdn.steamcommunity.com/economy/image/class/570/124470650/73fx73f?language=english">
+										</div>
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+						</div>
+						<div class="tradeoffer_footer">
+																					<div style="clear: right;"></div>
+						</div>
+					</div>
+					<div class="tradeoffer_rule"></div>
+				
+					<div class="tradeoffer" id="tradeofferid_367728">
+												<div class="tradeoffer_header">
+							You offered yene F*AWESOME a trade:						</div>
+													<div class="tradeoffer_message">
+								"Thank you for using dotadup.com"
+							</div>
+												<div class="tradeoffer_items_ctn  inactive">
+														<div class="tradeoffer_items primary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/profiles/76561198080209564" data-miniprofile="119943836">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/a0/a0ba3cd16ad135fd6b9280d0a8e4bef505cd61a9.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									You offered:								</div>
+								<div class="tradeoffer_item_list">
+																			<div class="trade_item " style="border-color: #D2D2D2; " data-economy-item="570/2/1023024059/76561198080209564">
+											<img src="http://cdn.steamcommunity.com/economy/image/ksvXf9_5JagiyUe1u6HP2iqHHc6biSvo9geUr19Hh31bwOCEhuVjuoIQW0udwZNUMoBGi5aWK-zwDJO9XlGQd1SC-Z-U7WLwh1BMTZ2PlUFtkgfKyMtl4vY8jqIQR5t9SPLnjpDwfrHICVkdwN7EEiTCUIbDkDC9q1vO_xNSyi4JnaTSx7glutZbAEHF2MVCdN0Z0MY=/96fx96f">
+										</div>
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+															<div class="tradeoffer_items_banner ">
+									Trade Declined 17 Sep 2013								</div>
+														<div class="tradeoffer_items secondary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/id/yene" data-miniprofile="4249969">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/cc/ccb301444d77f74a563e0e568cb7cc1b160abb1c.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									For yene F*AWESOME's:								</div>
+								<div class="tradeoffer_item_list">
+																			<div class="trade_item missing" style="border-color: #D2D2D2; " data-economy-item="570/2/16294103/76561197964515697">
+											<img src="http://cdn.steamcommunity.com/economy/image/2YwaGbIND_jS_fU2j_bXEGHA0Kj2fQG4BjMmLGsQn7cQhy3i6xFJ6nIk6ciploueeceL7ftiAbwAOCE-agaIvR_FNPn5GUigYmPuwqzMhJpsxouvqTNeug0IJywoDo6gBYMw6LJBDLp3abvG9d3T3j2Mx-H-YBnjU2R8LHNSiOFFjGnuqk1fuidrucGhl5qAbg==/73fx73f">
+										</div>
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+						</div>
+						<div class="tradeoffer_footer">
+																					<div style="clear: right;"></div>
+						</div>
+					</div>
+					<div class="tradeoffer_rule"></div>
+				
+					<div class="tradeoffer" id="tradeofferid_367711">
+												<div class="tradeoffer_header">
+							You offered yene F*AWESOME a trade:						</div>
+													<div class="tradeoffer_message">
+								"Thank you for donating, this site would not work without you."
+							</div>
+												<div class="tradeoffer_items_ctn  inactive">
+														<div class="tradeoffer_items primary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/profiles/76561198080209564" data-miniprofile="119943836">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/a0/a0ba3cd16ad135fd6b9280d0a8e4bef505cd61a9.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									You offered:								</div>
+								<div class="tradeoffer_item_list">
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+															<div class="tradeoffer_items_banner accepted">
+									Trade Accepted!								</div>
+														<div class="tradeoffer_items secondary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/id/yene" data-miniprofile="4249969">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/cc/ccb301444d77f74a563e0e568cb7cc1b160abb1c.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									For yene F*AWESOME's:								</div>
+								<div class="tradeoffer_item_list">
+																			<div class="trade_item " style="border-color: #D2D2D2; " data-economy-item="570/2/117508113/76561197964515697">
+											<img src="http://cdn.steamcommunity.com/economy/image/UnHvQkIZoCPeKvmB7fp0Puo9JfMGaa5jCuQqmwkcPJmbeti5GwXmMX7z5X_Lmiiw8jp-tgt2rmcM7y2JCAork5Q4waIJDed7aa3vYs_BFqLwLDDoWTSuYQzjNpZTMDydlnjG-QMD9yF2qdlkx9kmrqx8MrQOcrZtXOF7w0UNfcufdsrvD1HyYi7l4yTA0HyktC9h4lgkuGhZrjOUQA==/73fx73f">
+										</div>
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+						</div>
+						<div class="tradeoffer_footer">
+																					<div style="clear: right;"></div>
+						</div>
+					</div>
+					<div class="tradeoffer_rule"></div>
+				
+					<div class="tradeoffer" id="tradeofferid_367509">
+												<div class="tradeoffer_header">
+							You offered yene F*AWESOME a trade:						</div>
+													<div class="tradeoffer_message">
+								"Thank you for using dotadup.com"
+							</div>
+												<div class="tradeoffer_items_ctn  inactive">
+														<div class="tradeoffer_items primary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/profiles/76561198080209564" data-miniprofile="119943836">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/a0/a0ba3cd16ad135fd6b9280d0a8e4bef505cd61a9.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									You offered:								</div>
+								<div class="tradeoffer_item_list">
+																			<div class="trade_item " style="border-color: #D2D2D2; " data-economy-item="570/2/1028756595/76561198080209564">
+											<img src="http://cdn.steamcommunity.com/economy/image/Y8xc5GchEtP6JhNtuW8hjtuAllUjURyTLujAd12JaSmqx2sfPj1UwVr_D5OfD30Aw4fNEC5OHJco48dlXJ9-I6WFcgQsNVWLXL0Dk5Z_bxXWn4dXNg1DlyXtxUkEn3w8pMQ0AzkxSMVSjhuZk1BzHp3AgEN8GgqfKb-fchHOKXn8nn8RcWoQkliwX8rEEixBgcLaR30cUMp5otl4FA==/96fx96f">
+										</div>
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+															<div class="tradeoffer_items_banner ">
+									Trade Declined 17 Sep 2013								</div>
+														<div class="tradeoffer_items secondary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/id/yene" data-miniprofile="4249969">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/cc/ccb301444d77f74a563e0e568cb7cc1b160abb1c.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									For yene F*AWESOME's:								</div>
+								<div class="tradeoffer_item_list">
+																			<div class="trade_item missing" style="" data-economy-item="classinfo/570/93975462/57949762">
+											<img src="http://cdn.steamcommunity.com/economy/image/class/570/93975462/73fx73f?language=english">
+										</div>
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+						</div>
+						<div class="tradeoffer_footer">
+																					<div style="clear: right;"></div>
+						</div>
+					</div>
+					<div class="tradeoffer_rule"></div>
+				
+					<div class="tradeoffer" id="tradeofferid_366930">
+												<div class="tradeoffer_header">
+							You offered yene F*AWESOME a trade:						</div>
+													<div class="tradeoffer_message">
+								"Thank you for donating, this site would not work without you."
+							</div>
+												<div class="tradeoffer_items_ctn  inactive">
+														<div class="tradeoffer_items primary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/profiles/76561198080209564" data-miniprofile="119943836">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/a0/a0ba3cd16ad135fd6b9280d0a8e4bef505cd61a9.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									You offered:								</div>
+								<div class="tradeoffer_item_list">
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+															<div class="tradeoffer_items_banner ">
+									Trade Declined 17 Sep 2013								</div>
+														<div class="tradeoffer_items secondary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/id/yene" data-miniprofile="4249969">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/cc/ccb301444d77f74a563e0e568cb7cc1b160abb1c.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									For yene F*AWESOME's:								</div>
+								<div class="tradeoffer_item_list">
+																			<div class="trade_item missing" style="border-color: #D2D2D2; " data-economy-item="570/2/16294103/76561197964515697">
+											<img src="http://cdn.steamcommunity.com/economy/image/2YwaGbIND_jS_fU2j_bXEGHA0Kj2fQG4BjMmLGsQn7cQhy3i6xFJ6nIk6ciploueeceL7ftiAbwAOCE-agaIvR_FNPn5GUigYmPuwqzMhJpsxouvqTNeug0IJywoDo6gBYMw6LJBDLp3abvG9d3T3j2Mx-H-YBnjU2R8LHNSiOFFjGnuqk1fuidrucGhl5qAbg==/73fx73f">
+										</div>
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+						</div>
+						<div class="tradeoffer_footer">
+																					<div style="clear: right;"></div>
+						</div>
+					</div>
+					<div class="tradeoffer_rule"></div>
+				
+					<div class="tradeoffer" id="tradeofferid_367207">
+												<div class="tradeoffer_header">
+							You offered yene F*AWESOME a trade:						</div>
+													<div class="tradeoffer_message">
+								"Thank you for donating, this site would not work without you."
+							</div>
+												<div class="tradeoffer_items_ctn  inactive">
+														<div class="tradeoffer_items primary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/profiles/76561198080209564" data-miniprofile="119943836">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/a0/a0ba3cd16ad135fd6b9280d0a8e4bef505cd61a9.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									You offered:								</div>
+								<div class="tradeoffer_item_list">
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+															<div class="tradeoffer_items_banner ">
+									Trade Declined 17 Sep 2013								</div>
+														<div class="tradeoffer_items secondary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/id/yene" data-miniprofile="4249969">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/cc/ccb301444d77f74a563e0e568cb7cc1b160abb1c.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									For yene F*AWESOME's:								</div>
+								<div class="tradeoffer_item_list">
+																			<div class="trade_item missing" style="border-color: #D2D2D2; " data-economy-item="570/2/16294103/76561197964515697">
+											<img src="http://cdn.steamcommunity.com/economy/image/2YwaGbIND_jS_fU2j_bXEGHA0Kj2fQG4BjMmLGsQn7cQhy3i6xFJ6nIk6ciploueeceL7ftiAbwAOCE-agaIvR_FNPn5GUigYmPuwqzMhJpsxouvqTNeug0IJywoDo6gBYMw6LJBDLp3abvG9d3T3j2Mx-H-YBnjU2R8LHNSiOFFjGnuqk1fuidrucGhl5qAbg==/73fx73f">
+										</div>
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+						</div>
+						<div class="tradeoffer_footer">
+																					<div style="clear: right;"></div>
+						</div>
+					</div>
+					<div class="tradeoffer_rule"></div>
+				
+					<div class="tradeoffer" id="tradeofferid_366772">
+												<div class="tradeoffer_header">
+							You offered yene F*AWESOME a trade:						</div>
+													<div class="tradeoffer_message">
+								"Thank you for donating, this site would not work without you."
+							</div>
+												<div class="tradeoffer_items_ctn  inactive">
+														<div class="tradeoffer_items primary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/profiles/76561198080209564" data-miniprofile="119943836">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/a0/a0ba3cd16ad135fd6b9280d0a8e4bef505cd61a9.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									You offered:								</div>
+								<div class="tradeoffer_item_list">
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+															<div class="tradeoffer_items_banner ">
+									Trade Declined 17 Sep 2013								</div>
+														<div class="tradeoffer_items secondary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/id/yene" data-miniprofile="4249969">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/cc/ccb301444d77f74a563e0e568cb7cc1b160abb1c.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									For yene F*AWESOME's:								</div>
+								<div class="tradeoffer_item_list">
+																			<div class="trade_item missing" style="" data-economy-item="classinfo/570/93975462/57949762">
+											<img src="http://cdn.steamcommunity.com/economy/image/class/570/93975462/73fx73f?language=english">
+										</div>
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+						</div>
+						<div class="tradeoffer_footer">
+																					<div style="clear: right;"></div>
+						</div>
+					</div>
+					<div class="tradeoffer_rule"></div>
+				
+					<div class="tradeoffer" id="tradeofferid_366679">
+												<div class="tradeoffer_header">
+							You offered yene F*AWESOME a trade:						</div>
+													<div class="tradeoffer_message">
+								"Thank you for donating, this site would not work without you."
+							</div>
+												<div class="tradeoffer_items_ctn  inactive">
+														<div class="tradeoffer_items primary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/profiles/76561198080209564" data-miniprofile="119943836">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/a0/a0ba3cd16ad135fd6b9280d0a8e4bef505cd61a9.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									You offered:								</div>
+								<div class="tradeoffer_item_list">
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+															<div class="tradeoffer_items_banner ">
+									Trade Declined 17 Sep 2013								</div>
+														<div class="tradeoffer_items secondary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/id/yene" data-miniprofile="4249969">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/cc/ccb301444d77f74a563e0e568cb7cc1b160abb1c.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									For yene F*AWESOME's:								</div>
+								<div class="tradeoffer_item_list">
+																			<div class="trade_item missing" style="border-color: #D2D2D2; " data-economy-item="570/2/16294103/76561197964515697">
+											<img src="http://cdn.steamcommunity.com/economy/image/2YwaGbIND_jS_fU2j_bXEGHA0Kj2fQG4BjMmLGsQn7cQhy3i6xFJ6nIk6ciploueeceL7ftiAbwAOCE-agaIvR_FNPn5GUigYmPuwqzMhJpsxouvqTNeug0IJywoDo6gBYMw6LJBDLp3abvG9d3T3j2Mx-H-YBnjU2R8LHNSiOFFjGnuqk1fuidrucGhl5qAbg==/73fx73f">
+										</div>
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+						</div>
+						<div class="tradeoffer_footer">
+																					<div style="clear: right;"></div>
+						</div>
+					</div>
+					<div class="tradeoffer_rule"></div>
+				
+					<div class="tradeoffer" id="tradeofferid_366620">
+												<div class="tradeoffer_header">
+							You offered yene F*AWESOME a trade:						</div>
+													<div class="tradeoffer_message">
+								"Thank you for donating, this site would not work without you."
+							</div>
+												<div class="tradeoffer_items_ctn  inactive">
+														<div class="tradeoffer_items primary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/profiles/76561198080209564" data-miniprofile="119943836">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/a0/a0ba3cd16ad135fd6b9280d0a8e4bef505cd61a9.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									You offered:								</div>
+								<div class="tradeoffer_item_list">
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+															<div class="tradeoffer_items_banner ">
+									Trade Declined 17 Sep 2013								</div>
+														<div class="tradeoffer_items secondary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/id/yene" data-miniprofile="4249969">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/cc/ccb301444d77f74a563e0e568cb7cc1b160abb1c.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									For yene F*AWESOME's:								</div>
+								<div class="tradeoffer_item_list">
+																			<div class="trade_item missing" style="" data-economy-item="classinfo/570/93975462/57949762">
+											<img src="http://cdn.steamcommunity.com/economy/image/class/570/93975462/73fx73f?language=english">
+										</div>
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+						</div>
+						<div class="tradeoffer_footer">
+																					<div style="clear: right;"></div>
+						</div>
+					</div>
+					<div class="tradeoffer_rule"></div>
+				
+					<div class="tradeoffer" id="tradeofferid_366083">
+												<div class="tradeoffer_header">
+							You offered yene F*AWESOME a trade:						</div>
+													<div class="tradeoffer_message">
+								"Thank you for donating, this site would not work without you."
+							</div>
+												<div class="tradeoffer_items_ctn  inactive">
+														<div class="tradeoffer_items primary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/profiles/76561198080209564" data-miniprofile="119943836">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/a0/a0ba3cd16ad135fd6b9280d0a8e4bef505cd61a9.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									You offered:								</div>
+								<div class="tradeoffer_item_list">
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+															<div class="tradeoffer_items_banner accepted">
+									Trade Accepted!								</div>
+														<div class="tradeoffer_items secondary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/id/yene" data-miniprofile="4249969">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/cc/ccb301444d77f74a563e0e568cb7cc1b160abb1c.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									For yene F*AWESOME's:								</div>
+								<div class="tradeoffer_item_list">
+																			<div class="trade_item " style="" data-economy-item="classinfo/570/106630588/57949762">
+											<img src="http://cdn.steamcommunity.com/economy/image/class/570/106630588/73fx73f?language=english">
+										</div>
+																			<div class="trade_item " style="border-color: #D2D2D2; " data-economy-item="570/2/285609197/76561197964515697">
+											<img src="http://cdn.steamcommunity.com/economy/image/d0L39Af1Vka9CWY96t3yLM8OPUVDhVgGace1Jw47uou-ScAPXukQVB3QesPMva6i1wlmAE6aWAJvzLI1Dy2tgbEL2RRM4REeHZF2wY7xoKDVDzlBHM4EA23RuBkQeuGNsFbCFVn4B1UKlnjexc3_4IkffAEcnUUPbcbuJBd7qo3tRYUDEbRXCEDHfJiUq_jjlkJ4BhiSQF44jawoRw==/73fx73f">
+										</div>
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+						</div>
+						<div class="tradeoffer_footer">
+																					<div style="clear: right;"></div>
+						</div>
+					</div>
+					<div class="tradeoffer_rule"></div>
+				
+					<div class="tradeoffer" id="tradeofferid_301193">
+												<div class="tradeoffer_header">
+							You offered doerig a trade:						</div>
+													<div class="tradeoffer_message">
+								"Thank you for using dotadup.com"
+							</div>
+												<div class="tradeoffer_items_ctn  inactive">
+														<div class="tradeoffer_items primary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/profiles/76561198080209564" data-miniprofile="119943836">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/a0/a0ba3cd16ad135fd6b9280d0a8e4bef505cd61a9.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									You offered:								</div>
+								<div class="tradeoffer_item_list">
+																			<div class="trade_item " style="" data-economy-item="classinfo/570/73632538">
+											<img src="http://cdn.steamcommunity.com/economy/image/class/570/73632538/96fx96f?language=english">
+										</div>
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+															<div class="tradeoffer_items_banner accepted">
+									Trade Accepted!								</div>
+														<div class="tradeoffer_items secondary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/profiles/76561197967264476" data-miniprofile="6998748">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/d5/d563a754a99b1b86174e742aa7acf03bf31bd15a.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									For doerig's:								</div>
+								<div class="tradeoffer_item_list">
+																			<div class="trade_item " style="" data-economy-item="classinfo/570/57939749">
+											<img src="http://cdn.steamcommunity.com/economy/image/class/570/57939749/73fx73f?language=english">
+										</div>
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+						</div>
+						<div class="tradeoffer_footer">
+																					<div style="clear: right;"></div>
+						</div>
+					</div>
+					<div class="tradeoffer_rule"></div>
+				
+					<div class="tradeoffer" id="tradeofferid_300983">
+												<div class="tradeoffer_header">
+							You offered yene F*AWESOME a trade:						</div>
+													<div class="tradeoffer_message">
+								"Thank you for using dotadup.com"
+							</div>
+												<div class="tradeoffer_items_ctn  inactive">
+														<div class="tradeoffer_items primary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/profiles/76561198080209564" data-miniprofile="119943836">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/a0/a0ba3cd16ad135fd6b9280d0a8e4bef505cd61a9.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									You offered:								</div>
+								<div class="tradeoffer_item_list">
+																			<div class="trade_item " style="border-color: #D2D2D2; " data-economy-item="570/2/1023024059/76561198080209564">
+											<img src="http://cdn.steamcommunity.com/economy/image/ksvXf9_5JagiyUe1u6HP2iqHHc6biSvo9geUr19Hh31bwOCEhuVjuoIQW0udwZNUMoBGi5aWK-zwDJO9XlGQd1SC-Z-U7WLwh1BMTZ2PlUFtkgfKyMtl4vY8jqIQR5t9SPLnjpDwfrHICVkdwN7EEiTCUIbDkDC9q1vO_xNSyi4JnaTSx7glutZbAEHF2MVCdN0Z0MY=/96fx96f">
+										</div>
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+															<div class="tradeoffer_items_banner ">
+									Trade Declined 15 Sep 2013								</div>
+														<div class="tradeoffer_items secondary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/id/yene" data-miniprofile="4249969">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/cc/ccb301444d77f74a563e0e568cb7cc1b160abb1c.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									For yene F*AWESOME's:								</div>
+								<div class="tradeoffer_item_list">
+																			<div class="trade_item " style="border-color: #D2D2D2; " data-economy-item="570/2/117519699/76561197964515697">
+											<img src="http://cdn.steamcommunity.com/economy/image/UnHvQkIZoCPeKvmB7fp0Puo9JfMGaa5jCuQqmwkcPJmbeti5GwXmMX7z5X_Lmiiw8jp-tgt2rmcM7y2JCAork5Q4waIJDed7aa3vYs_BFqLwLDDoWTSuYQzjNpZTMDydlnjG-QMD9yF2qdlkx9kmrqx8MrQOcrZtXOF7w0UNfcufdsrvD1HyYi7l4yTA0HyktC9h4lgkuGhZrjOUQA==/73fx73f">
+										</div>
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+						</div>
+						<div class="tradeoffer_footer">
+																					<div style="clear: right;"></div>
+						</div>
+					</div>
+					<div class="tradeoffer_rule"></div>
+				
+					<div class="tradeoffer" id="tradeofferid_300692">
+												<div class="tradeoffer_header">
+							You offered yene F*AWESOME a trade:						</div>
+													<div class="tradeoffer_message">
+								"Thank you for using dotadup.com"
+							</div>
+												<div class="tradeoffer_items_ctn  inactive">
+														<div class="tradeoffer_items primary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/profiles/76561198080209564" data-miniprofile="119943836">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/a0/a0ba3cd16ad135fd6b9280d0a8e4bef505cd61a9.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									You offered:								</div>
+								<div class="tradeoffer_item_list">
+																			<div class="trade_item " style="border-color: #D2D2D2; " data-economy-item="570/2/1028756600/76561198080209564">
+											<img src="http://cdn.steamcommunity.com/economy/image/JxvJg3BI-NuUTTQciKdtAp9XAzI0OPabQIPnBmxBJaXuEP54KVS-yTSUKOKuxzGMh1BYdzkn9p9GiOAUbVcyr-FS52M7XL-DMcIuoqGEMZ-cUBoren-GgUCG_ggsHGWi6hzqIW1Vrpoxiy268N1jxJJFEyE4JbqSE4a7USNXY_i6HOojPQHi3D7d/96fx96f">
+										</div>
+																			<div class="trade_item " style="border-color: #D2D2D2; " data-economy-item="570/2/1028756595/76561198080209564">
+											<img src="http://cdn.steamcommunity.com/economy/image/Y8xc5GchEtP6JhNtuW8hjtuAllUjURyTLujAd12JaSmqx2sfPj1UwVr_D5OfD30Aw4fNEC5OHJco48dlXJ9-I6WFcgQsNVWLXL0Dk5Z_bxXWn4dXNg1DlyXtxUkEn3w8pMQ0AzkxSMVSjhuZk1BzHp3AgEN8GgqfKb-fchHOKXn8nn8RcWoQkliwX8rEEixBgcLaR30cUMp5otl4FA==/96fx96f">
+										</div>
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+															<div class="tradeoffer_items_banner ">
+									Trade Declined 15 Sep 2013								</div>
+														<div class="tradeoffer_items secondary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/id/yene" data-miniprofile="4249969">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/cc/ccb301444d77f74a563e0e568cb7cc1b160abb1c.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									For yene F*AWESOME's:								</div>
+								<div class="tradeoffer_item_list">
+																			<div class="trade_item missing" style="" data-economy-item="classinfo/570/124470650/57949762">
+											<img src="http://cdn.steamcommunity.com/economy/image/class/570/124470650/73fx73f?language=english">
+										</div>
+																			<div class="trade_item " style="border-color: #D2D2D2; " data-economy-item="570/2/117519699/76561197964515697">
+											<img src="http://cdn.steamcommunity.com/economy/image/UnHvQkIZoCPeKvmB7fp0Puo9JfMGaa5jCuQqmwkcPJmbeti5GwXmMX7z5X_Lmiiw8jp-tgt2rmcM7y2JCAork5Q4waIJDed7aa3vYs_BFqLwLDDoWTSuYQzjNpZTMDydlnjG-QMD9yF2qdlkx9kmrqx8MrQOcrZtXOF7w0UNfcufdsrvD1HyYi7l4yTA0HyktC9h4lgkuGhZrjOUQA==/73fx73f">
+										</div>
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+						</div>
+						<div class="tradeoffer_footer">
+																					<div style="clear: right;"></div>
+						</div>
+					</div>
+					<div class="tradeoffer_rule"></div>
+				
+					<div class="tradeoffer" id="tradeofferid_300575">
+												<div class="tradeoffer_header">
+							You offered yene F*AWESOME a trade:						</div>
+													<div class="tradeoffer_message">
+								"Thank you for using dotadup.com"
+							</div>
+												<div class="tradeoffer_items_ctn  inactive">
+														<div class="tradeoffer_items primary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/profiles/76561198080209564" data-miniprofile="119943836">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/a0/a0ba3cd16ad135fd6b9280d0a8e4bef505cd61a9.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									You offered:								</div>
+								<div class="tradeoffer_item_list">
+																			<div class="trade_item " style="border-color: #D2D2D2; " data-economy-item="570/2/1023024059/76561198080209564">
+											<img src="http://cdn.steamcommunity.com/economy/image/ksvXf9_5JagiyUe1u6HP2iqHHc6biSvo9geUr19Hh31bwOCEhuVjuoIQW0udwZNUMoBGi5aWK-zwDJO9XlGQd1SC-Z-U7WLwh1BMTZ2PlUFtkgfKyMtl4vY8jqIQR5t9SPLnjpDwfrHICVkdwN7EEiTCUIbDkDC9q1vO_xNSyi4JnaTSx7glutZbAEHF2MVCdN0Z0MY=/96fx96f">
+										</div>
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+															<div class="tradeoffer_items_banner ">
+									Trade Declined 15 Sep 2013								</div>
+														<div class="tradeoffer_items secondary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/id/yene" data-miniprofile="4249969">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/cc/ccb301444d77f74a563e0e568cb7cc1b160abb1c.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									For yene F*AWESOME's:								</div>
+								<div class="tradeoffer_item_list">
+																			<div class="trade_item " style="border-color: #D2D2D2; " data-economy-item="570/2/17990614/76561197964515697">
+											<img src="http://cdn.steamcommunity.com/economy/image/2YwaGbIND_jS_fU2j_bXEGHA0Kj2fQG4BjMmLGsQn7cQhy3i6xFJ6nIk6ciploueeceL7ftiAbwAOCE-agaIvR_FNPn5GUigYmPuwqzMhJpsxouvqTNeug0IJywoDo6gBYMw6LJBDLp3abvG9d3T3j2Mx-H-YBnjU2R8LHNSiOFFjGnuqk1fuidrucGhl5qAbg==/73fx73f">
+										</div>
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+						</div>
+						<div class="tradeoffer_footer">
+																					<div style="clear: right;"></div>
+						</div>
+					</div>
+					<div class="tradeoffer_rule"></div>
+				
+					<div class="tradeoffer" id="tradeofferid_300344">
+												<div class="tradeoffer_header">
+							You offered yene F*AWESOME a trade:						</div>
+													<div class="tradeoffer_message">
+								"Thank you for using dotadup.com"
+							</div>
+												<div class="tradeoffer_items_ctn  inactive">
+														<div class="tradeoffer_items primary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/profiles/76561198080209564" data-miniprofile="119943836">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/a0/a0ba3cd16ad135fd6b9280d0a8e4bef505cd61a9.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									You offered:								</div>
+								<div class="tradeoffer_item_list">
+																			<div class="trade_item " style="border-color: #D2D2D2; " data-economy-item="570/2/1023024059/76561198080209564">
+											<img src="http://cdn.steamcommunity.com/economy/image/ksvXf9_5JagiyUe1u6HP2iqHHc6biSvo9geUr19Hh31bwOCEhuVjuoIQW0udwZNUMoBGi5aWK-zwDJO9XlGQd1SC-Z-U7WLwh1BMTZ2PlUFtkgfKyMtl4vY8jqIQR5t9SPLnjpDwfrHICVkdwN7EEiTCUIbDkDC9q1vO_xNSyi4JnaTSx7glutZbAEHF2MVCdN0Z0MY=/96fx96f">
+										</div>
+																			<div class="trade_item " style="border-color: #D2D2D2; " data-economy-item="570/2/992276690/76561198080209564">
+											<img src="http://cdn.steamcommunity.com/economy/image/gPcPGg0sQ244pRYEwSMaJDi7xatJXE0u7GvFHiXFUoNJ_DjhVDAFfJh8CvrnQ0aqILye7kRDTSrqYMIMJNNFiUa-IfpGOAQ2kCsK9ORDVLI_ut2_FgE9IuV_xB4kxU6JXf0s61EKFnWMOgi7v1RF4mCsh-NEQFR6uDfPGzuGQNcf8yy2GmRHfcUxXaDuDx7rZ6mCuV0DDCQ=/96fx96f">
+										</div>
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+															<div class="tradeoffer_items_banner ">
+									Trade Declined 15 Sep 2013								</div>
+														<div class="tradeoffer_items secondary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/id/yene" data-miniprofile="4249969">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/cc/ccb301444d77f74a563e0e568cb7cc1b160abb1c.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									For yene F*AWESOME's:								</div>
+								<div class="tradeoffer_item_list">
+																			<div class="trade_item missing" style="" data-economy-item="classinfo/570/106630588/57949762">
+											<img src="http://cdn.steamcommunity.com/economy/image/class/570/106630588/73fx73f?language=english">
+										</div>
+																			<div class="trade_item missing" style="" data-economy-item="classinfo/570/124470650/57949762">
+											<img src="http://cdn.steamcommunity.com/economy/image/class/570/124470650/73fx73f?language=english">
+										</div>
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+						</div>
+						<div class="tradeoffer_footer">
+																					<div style="clear: right;"></div>
+						</div>
+					</div>
+					<div class="tradeoffer_rule"></div>
+				
+					<div class="tradeoffer" id="tradeofferid_300312">
+												<div class="tradeoffer_header">
+							You offered yene F*AWESOME a trade:						</div>
+													<div class="tradeoffer_message">
+								"Thank you for using dotadup.com"
+							</div>
+												<div class="tradeoffer_items_ctn  inactive">
+														<div class="tradeoffer_items primary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/profiles/76561198080209564" data-miniprofile="119943836">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/a0/a0ba3cd16ad135fd6b9280d0a8e4bef505cd61a9.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									You offered:								</div>
+								<div class="tradeoffer_item_list">
+																			<div class="trade_item " style="border-color: #D2D2D2; " data-economy-item="570/2/1023024059/76561198080209564">
+											<img src="http://cdn.steamcommunity.com/economy/image/ksvXf9_5JagiyUe1u6HP2iqHHc6biSvo9geUr19Hh31bwOCEhuVjuoIQW0udwZNUMoBGi5aWK-zwDJO9XlGQd1SC-Z-U7WLwh1BMTZ2PlUFtkgfKyMtl4vY8jqIQR5t9SPLnjpDwfrHICVkdwN7EEiTCUIbDkDC9q1vO_xNSyi4JnaTSx7glutZbAEHF2MVCdN0Z0MY=/96fx96f">
+										</div>
+																			<div class="trade_item " style="border-color: #D2D2D2; " data-economy-item="570/2/992276690/76561198080209564">
+											<img src="http://cdn.steamcommunity.com/economy/image/gPcPGg0sQ244pRYEwSMaJDi7xatJXE0u7GvFHiXFUoNJ_DjhVDAFfJh8CvrnQ0aqILye7kRDTSrqYMIMJNNFiUa-IfpGOAQ2kCsK9ORDVLI_ut2_FgE9IuV_xB4kxU6JXf0s61EKFnWMOgi7v1RF4mCsh-NEQFR6uDfPGzuGQNcf8yy2GmRHfcUxXaDuDx7rZ6mCuV0DDCQ=/96fx96f">
+										</div>
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+															<div class="tradeoffer_items_banner ">
+									Trade Declined 15 Sep 2013								</div>
+														<div class="tradeoffer_items secondary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/id/yene" data-miniprofile="4249969">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/cc/ccb301444d77f74a563e0e568cb7cc1b160abb1c.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									For yene F*AWESOME's:								</div>
+								<div class="tradeoffer_item_list">
+																			<div class="trade_item " style="border-color: #D2D2D2; " data-economy-item="570/2/297366146/76561197964515697">
+											<img src="http://cdn.steamcommunity.com/economy/image/d0L39Af1Vka9CWY96t3yLM8OPUVDhVgGace1Jw47uou-ScAPXukQVB3QesPMva6i1wlmAE6aWAJvzLI1Dy2tgbEL2RRM4REeHZF2wY7xoKDVDzlBHM4EA23RuBkQeuGNsFbCFVn4B1UKlnjexc3_4IkffAEcnUUPbcbuJBd7qo3tRYUDEbRXCEDHfJiUq_jjlkJ4BhiSQF44jawoRw==/73fx73f">
+										</div>
+																			<div class="trade_item missing" style="" data-economy-item="classinfo/570/124470650/57949762">
+											<img src="http://cdn.steamcommunity.com/economy/image/class/570/124470650/73fx73f?language=english">
+										</div>
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+						</div>
+						<div class="tradeoffer_footer">
+																					<div style="clear: right;"></div>
+						</div>
+					</div>
+					<div class="tradeoffer_rule"></div>
+				
+					<div class="tradeoffer" id="tradeofferid_300232">
+												<div class="tradeoffer_header">
+							You offered yene F*AWESOME a trade:						</div>
+													<div class="tradeoffer_message">
+								"Thank you for using dotadup.com"
+							</div>
+												<div class="tradeoffer_items_ctn  inactive">
+														<div class="tradeoffer_items primary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/profiles/76561198080209564" data-miniprofile="119943836">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/a0/a0ba3cd16ad135fd6b9280d0a8e4bef505cd61a9.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									You offered:								</div>
+								<div class="tradeoffer_item_list">
+																			<div class="trade_item " style="border-color: #D2D2D2; " data-economy-item="570/2/1023024059/76561198080209564">
+											<img src="http://cdn.steamcommunity.com/economy/image/ksvXf9_5JagiyUe1u6HP2iqHHc6biSvo9geUr19Hh31bwOCEhuVjuoIQW0udwZNUMoBGi5aWK-zwDJO9XlGQd1SC-Z-U7WLwh1BMTZ2PlUFtkgfKyMtl4vY8jqIQR5t9SPLnjpDwfrHICVkdwN7EEiTCUIbDkDC9q1vO_xNSyi4JnaTSx7glutZbAEHF2MVCdN0Z0MY=/96fx96f">
+										</div>
+																			<div class="trade_item " style="border-color: #D2D2D2; " data-economy-item="570/2/992276690/76561198080209564">
+											<img src="http://cdn.steamcommunity.com/economy/image/gPcPGg0sQ244pRYEwSMaJDi7xatJXE0u7GvFHiXFUoNJ_DjhVDAFfJh8CvrnQ0aqILye7kRDTSrqYMIMJNNFiUa-IfpGOAQ2kCsK9ORDVLI_ut2_FgE9IuV_xB4kxU6JXf0s61EKFnWMOgi7v1RF4mCsh-NEQFR6uDfPGzuGQNcf8yy2GmRHfcUxXaDuDx7rZ6mCuV0DDCQ=/96fx96f">
+										</div>
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+															<div class="tradeoffer_items_banner ">
+									Trade Declined 15 Sep 2013								</div>
+														<div class="tradeoffer_items secondary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/id/yene" data-miniprofile="4249969">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/cc/ccb301444d77f74a563e0e568cb7cc1b160abb1c.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									For yene F*AWESOME's:								</div>
+								<div class="tradeoffer_item_list">
+																			<div class="trade_item " style="border-color: #D2D2D2; " data-economy-item="570/2/297366146/76561197964515697">
+											<img src="http://cdn.steamcommunity.com/economy/image/d0L39Af1Vka9CWY96t3yLM8OPUVDhVgGace1Jw47uou-ScAPXukQVB3QesPMva6i1wlmAE6aWAJvzLI1Dy2tgbEL2RRM4REeHZF2wY7xoKDVDzlBHM4EA23RuBkQeuGNsFbCFVn4B1UKlnjexc3_4IkffAEcnUUPbcbuJBd7qo3tRYUDEbRXCEDHfJiUq_jjlkJ4BhiSQF44jawoRw==/73fx73f">
+										</div>
+																			<div class="trade_item missing" style="" data-economy-item="classinfo/570/124470650/57949762">
+											<img src="http://cdn.steamcommunity.com/economy/image/class/570/124470650/73fx73f?language=english">
+										</div>
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+						</div>
+						<div class="tradeoffer_footer">
+																					<div style="clear: right;"></div>
+						</div>
+					</div>
+					<div class="tradeoffer_rule"></div>
+				
+					<div class="tradeoffer" id="tradeofferid_300017">
+												<div class="tradeoffer_header">
+							You offered yene F*AWESOME a trade:						</div>
+													<div class="tradeoffer_message">
+								"Thank you for using dotadup.com"
+							</div>
+												<div class="tradeoffer_items_ctn  inactive">
+														<div class="tradeoffer_items primary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/profiles/76561198080209564" data-miniprofile="119943836">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/a0/a0ba3cd16ad135fd6b9280d0a8e4bef505cd61a9.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									You offered:								</div>
+								<div class="tradeoffer_item_list">
+																			<div class="trade_item " style="border-color: #D2D2D2; " data-economy-item="570/2/1023024059/76561198080209564">
+											<img src="http://cdn.steamcommunity.com/economy/image/ksvXf9_5JagiyUe1u6HP2iqHHc6biSvo9geUr19Hh31bwOCEhuVjuoIQW0udwZNUMoBGi5aWK-zwDJO9XlGQd1SC-Z-U7WLwh1BMTZ2PlUFtkgfKyMtl4vY8jqIQR5t9SPLnjpDwfrHICVkdwN7EEiTCUIbDkDC9q1vO_xNSyi4JnaTSx7glutZbAEHF2MVCdN0Z0MY=/96fx96f">
+										</div>
+																			<div class="trade_item " style="border-color: #D2D2D2; " data-economy-item="570/2/992276690/76561198080209564">
+											<img src="http://cdn.steamcommunity.com/economy/image/gPcPGg0sQ244pRYEwSMaJDi7xatJXE0u7GvFHiXFUoNJ_DjhVDAFfJh8CvrnQ0aqILye7kRDTSrqYMIMJNNFiUa-IfpGOAQ2kCsK9ORDVLI_ut2_FgE9IuV_xB4kxU6JXf0s61EKFnWMOgi7v1RF4mCsh-NEQFR6uDfPGzuGQNcf8yy2GmRHfcUxXaDuDx7rZ6mCuV0DDCQ=/96fx96f">
+										</div>
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+															<div class="tradeoffer_items_banner ">
+									Trade Declined 15 Sep 2013								</div>
+														<div class="tradeoffer_items secondary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/id/yene" data-miniprofile="4249969">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/cc/ccb301444d77f74a563e0e568cb7cc1b160abb1c.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									For yene F*AWESOME's:								</div>
+								<div class="tradeoffer_item_list">
+																			<div class="trade_item " style="border-color: #D2D2D2; " data-economy-item="570/2/297366146/76561197964515697">
+											<img src="http://cdn.steamcommunity.com/economy/image/d0L39Af1Vka9CWY96t3yLM8OPUVDhVgGace1Jw47uou-ScAPXukQVB3QesPMva6i1wlmAE6aWAJvzLI1Dy2tgbEL2RRM4REeHZF2wY7xoKDVDzlBHM4EA23RuBkQeuGNsFbCFVn4B1UKlnjexc3_4IkffAEcnUUPbcbuJBd7qo3tRYUDEbRXCEDHfJiUq_jjlkJ4BhiSQF44jawoRw==/73fx73f">
+										</div>
+																			<div class="trade_item missing" style="" data-economy-item="classinfo/570/124470650/57949762">
+											<img src="http://cdn.steamcommunity.com/economy/image/class/570/124470650/73fx73f?language=english">
+										</div>
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+						</div>
+						<div class="tradeoffer_footer">
+																					<div style="clear: right;"></div>
+						</div>
+					</div>
+					<div class="tradeoffer_rule"></div>
+				
+					<div class="tradeoffer" id="tradeofferid_269390">
+												<div class="tradeoffer_header">
+							You offered yene F*AWESOME a trade:						</div>
+													<div class="tradeoffer_message">
+								"Thank you for using dotadup.com"
+							</div>
+												<div class="tradeoffer_items_ctn  inactive">
+														<div class="tradeoffer_items primary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/profiles/76561198080209564" data-miniprofile="119943836">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/a0/a0ba3cd16ad135fd6b9280d0a8e4bef505cd61a9.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									You offered:								</div>
+								<div class="tradeoffer_item_list">
+																			<div class="trade_item " style="border-color: #D2D2D2; " data-economy-item="570/2/316505426/76561198080209564">
+											<img src="http://cdn.steamcommunity.com/economy/image/My2v-0m9Q_MjXsQTS3AMH4thZUoNzU2z95AXCa-WRLj6JpgAEKEF4YOH2O1tEFCRk2Y-DwDSTbfxmxAbroBTsvVknAAIqASrk9ve43NKQ4S8dnlfRJY9veCNDRzgiR67_XOKXlbwFLfRzIzhMgwH0IYgcANU1wTs9sQcXrLcB-X5etENX_NBqpfH3A==/96fx96f">
+										</div>
+																			<div class="trade_item " style="border-color: #D2D2D2; " data-economy-item="570/2/316724645/76561198080209564">
+											<img src="http://cdn.steamcommunity.com/economy/image/a6TNdTCS2CkuYlBnf8J2T9PoB8R04tZp-qyDfZskPuiir_qOaY6eO467TJlZoirBy-9cgXn91m38p4RvmjIp4q3t45V7hp9xnfRdmlvuIJ7P6xrHOqidW_OphGjQJSSit7XjkmqOiAGG9EGCUf8ln93-RYYorsw2_KrTetFicrig9ejUe9qKZ4j2TMYHtHOA2qRGgy_-wDCxuIR7/96fx96f">
+										</div>
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+															<div class="tradeoffer_items_banner ">
+									Trade Declined 15 Sep 2013								</div>
+														<div class="tradeoffer_items secondary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/id/yene" data-miniprofile="4249969">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/cc/ccb301444d77f74a563e0e568cb7cc1b160abb1c.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									For yene F*AWESOME's:								</div>
+								<div class="tradeoffer_item_list">
+																			<div class="trade_item " style="border-color: #D2D2D2; " data-economy-item="570/2/297366146/76561197964515697">
+											<img src="http://cdn.steamcommunity.com/economy/image/d0L39Af1Vka9CWY96t3yLM8OPUVDhVgGace1Jw47uou-ScAPXukQVB3QesPMva6i1wlmAE6aWAJvzLI1Dy2tgbEL2RRM4REeHZF2wY7xoKDVDzlBHM4EA23RuBkQeuGNsFbCFVn4B1UKlnjexc3_4IkffAEcnUUPbcbuJBd7qo3tRYUDEbRXCEDHfJiUq_jjlkJ4BhiSQF44jawoRw==/73fx73f">
+										</div>
+																			<div class="trade_item missing" style="" data-economy-item="classinfo/570/124470650/57949762">
+											<img src="http://cdn.steamcommunity.com/economy/image/class/570/124470650/73fx73f?language=english">
+										</div>
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+						</div>
+						<div class="tradeoffer_footer">
+																					<div style="clear: right;"></div>
+						</div>
+					</div>
+					<div class="tradeoffer_rule"></div>
+				
+					<div class="tradeoffer" id="tradeofferid_263284">
+												<div class="tradeoffer_header">
+							You offered yene F*AWESOME a trade:						</div>
+													<div class="tradeoffer_message">
+								"Thank you for using dotadup.com"
+							</div>
+												<div class="tradeoffer_items_ctn  inactive">
+														<div class="tradeoffer_items primary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/profiles/76561198080209564" data-miniprofile="119943836">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/a0/a0ba3cd16ad135fd6b9280d0a8e4bef505cd61a9.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									You offered:								</div>
+								<div class="tradeoffer_item_list">
+																			<div class="trade_item " style="border-color: #D2D2D2; " data-economy-item="570/2/1023024059/76561198080209564">
+											<img src="http://cdn.steamcommunity.com/economy/image/ksvXf9_5JagiyUe1u6HP2iqHHc6biSvo9geUr19Hh31bwOCEhuVjuoIQW0udwZNUMoBGi5aWK-zwDJO9XlGQd1SC-Z-U7WLwh1BMTZ2PlUFtkgfKyMtl4vY8jqIQR5t9SPLnjpDwfrHICVkdwN7EEiTCUIbDkDC9q1vO_xNSyi4JnaTSx7glutZbAEHF2MVCdN0Z0MY=/96fx96f">
+										</div>
+																			<div class="trade_item " style="border-color: #D2D2D2; " data-economy-item="570/2/992276690/76561198080209564">
+											<img src="http://cdn.steamcommunity.com/economy/image/gPcPGg0sQ244pRYEwSMaJDi7xatJXE0u7GvFHiXFUoNJ_DjhVDAFfJh8CvrnQ0aqILye7kRDTSrqYMIMJNNFiUa-IfpGOAQ2kCsK9ORDVLI_ut2_FgE9IuV_xB4kxU6JXf0s61EKFnWMOgi7v1RF4mCsh-NEQFR6uDfPGzuGQNcf8yy2GmRHfcUxXaDuDx7rZ6mCuV0DDCQ=/96fx96f">
+										</div>
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+															<div class="tradeoffer_items_banner ">
+									Trade Declined 14 Sep 2013								</div>
+														<div class="tradeoffer_items secondary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/id/yene" data-miniprofile="4249969">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/cc/ccb301444d77f74a563e0e568cb7cc1b160abb1c.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									For yene F*AWESOME's:								</div>
+								<div class="tradeoffer_item_list">
+																			<div class="trade_item missing" style="border-color: #D2D2D2; " data-economy-item="570/2/285609197/76561197964515697">
+											<img src="http://cdn.steamcommunity.com/economy/image/d0L39Af1Vka9CWY96t3yLM8OPUVDhVgGace1Jw47uou-ScAPXukQVB3QesPMva6i1wlmAE6aWAJvzLI1Dy2tgbEL2RRM4REeHZF2wY7xoKDVDzlBHM4EA23RuBkQeuGNsFbCFVn4B1UKlnjexc3_4IkffAEcnUUPbcbuJBd7qo3tRYUDEbRXCEDHfJiUq_jjlkJ4BhiSQF44jawoRw==/73fx73f">
+										</div>
+																			<div class="trade_item missing" style="" data-economy-item="classinfo/570/124470650/57949762">
+											<img src="http://cdn.steamcommunity.com/economy/image/class/570/124470650/73fx73f?language=english">
+										</div>
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+						</div>
+						<div class="tradeoffer_footer">
+																					<div style="clear: right;"></div>
+						</div>
+					</div>
+					<div class="tradeoffer_rule"></div>
+				
+					<div class="tradeoffer" id="tradeofferid_262444">
+												<div class="tradeoffer_header">
+							You offered yene F*AWESOME a trade:						</div>
+													<div class="tradeoffer_message">
+								"Thank you for using dotadup.com"
+							</div>
+												<div class="tradeoffer_items_ctn  inactive">
+														<div class="tradeoffer_items primary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/profiles/76561198080209564" data-miniprofile="119943836">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/a0/a0ba3cd16ad135fd6b9280d0a8e4bef505cd61a9.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									You offered:								</div>
+								<div class="tradeoffer_item_list">
+																			<div class="trade_item " style="border-color: #D2D2D2; " data-economy-item="570/2/1023024059/76561198080209564">
+											<img src="http://cdn.steamcommunity.com/economy/image/ksvXf9_5JagiyUe1u6HP2iqHHc6biSvo9geUr19Hh31bwOCEhuVjuoIQW0udwZNUMoBGi5aWK-zwDJO9XlGQd1SC-Z-U7WLwh1BMTZ2PlUFtkgfKyMtl4vY8jqIQR5t9SPLnjpDwfrHICVkdwN7EEiTCUIbDkDC9q1vO_xNSyi4JnaTSx7glutZbAEHF2MVCdN0Z0MY=/96fx96f">
+										</div>
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+															<div class="tradeoffer_items_banner ">
+									Trade Declined 14 Sep 2013								</div>
+														<div class="tradeoffer_items secondary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/id/yene" data-miniprofile="4249969">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/cc/ccb301444d77f74a563e0e568cb7cc1b160abb1c.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									For yene F*AWESOME's:								</div>
+								<div class="tradeoffer_item_list">
+																			<div class="trade_item missing" style="border-color: #D2D2D2; " data-economy-item="570/2/285609197/76561197964515697">
+											<img src="http://cdn.steamcommunity.com/economy/image/d0L39Af1Vka9CWY96t3yLM8OPUVDhVgGace1Jw47uou-ScAPXukQVB3QesPMva6i1wlmAE6aWAJvzLI1Dy2tgbEL2RRM4REeHZF2wY7xoKDVDzlBHM4EA23RuBkQeuGNsFbCFVn4B1UKlnjexc3_4IkffAEcnUUPbcbuJBd7qo3tRYUDEbRXCEDHfJiUq_jjlkJ4BhiSQF44jawoRw==/73fx73f">
+										</div>
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+						</div>
+						<div class="tradeoffer_footer">
+																					<div style="clear: right;"></div>
+						</div>
+					</div>
+					<div class="tradeoffer_rule"></div>
+				
+					<div class="tradeoffer" id="tradeofferid_258121">
+												<div class="tradeoffer_header">
+							You offered yene F*AWESOME a trade:						</div>
+													<div class="tradeoffer_message">
+								"Thank you for using dotadup.com"
+							</div>
+												<div class="tradeoffer_items_ctn  inactive">
+														<div class="tradeoffer_items primary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/profiles/76561198080209564" data-miniprofile="119943836">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/a0/a0ba3cd16ad135fd6b9280d0a8e4bef505cd61a9.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									You offered:								</div>
+								<div class="tradeoffer_item_list">
+																			<div class="trade_item " style="border-color: #D2D2D2; " data-economy-item="570/2/1023024059/76561198080209564">
+											<img src="http://cdn.steamcommunity.com/economy/image/ksvXf9_5JagiyUe1u6HP2iqHHc6biSvo9geUr19Hh31bwOCEhuVjuoIQW0udwZNUMoBGi5aWK-zwDJO9XlGQd1SC-Z-U7WLwh1BMTZ2PlUFtkgfKyMtl4vY8jqIQR5t9SPLnjpDwfrHICVkdwN7EEiTCUIbDkDC9q1vO_xNSyi4JnaTSx7glutZbAEHF2MVCdN0Z0MY=/96fx96f">
+										</div>
+																			<div class="trade_item " style="border-color: #D2D2D2; " data-economy-item="570/2/992276690/76561198080209564">
+											<img src="http://cdn.steamcommunity.com/economy/image/gPcPGg0sQ244pRYEwSMaJDi7xatJXE0u7GvFHiXFUoNJ_DjhVDAFfJh8CvrnQ0aqILye7kRDTSrqYMIMJNNFiUa-IfpGOAQ2kCsK9ORDVLI_ut2_FgE9IuV_xB4kxU6JXf0s61EKFnWMOgi7v1RF4mCsh-NEQFR6uDfPGzuGQNcf8yy2GmRHfcUxXaDuDx7rZ6mCuV0DDCQ=/96fx96f">
+										</div>
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+															<div class="tradeoffer_items_banner ">
+									Trade Declined 14 Sep 2013								</div>
+														<div class="tradeoffer_items secondary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/id/yene" data-miniprofile="4249969">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/cc/ccb301444d77f74a563e0e568cb7cc1b160abb1c.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									For yene F*AWESOME's:								</div>
+								<div class="tradeoffer_item_list">
+																			<div class="trade_item missing" style="border-color: #D2D2D2; " data-economy-item="570/2/285609197/76561197964515697">
+											<img src="http://cdn.steamcommunity.com/economy/image/d0L39Af1Vka9CWY96t3yLM8OPUVDhVgGace1Jw47uou-ScAPXukQVB3QesPMva6i1wlmAE6aWAJvzLI1Dy2tgbEL2RRM4REeHZF2wY7xoKDVDzlBHM4EA23RuBkQeuGNsFbCFVn4B1UKlnjexc3_4IkffAEcnUUPbcbuJBd7qo3tRYUDEbRXCEDHfJiUq_jjlkJ4BhiSQF44jawoRw==/73fx73f">
+										</div>
+																			<div class="trade_item missing" style="" data-economy-item="classinfo/570/124470650/57949762">
+											<img src="http://cdn.steamcommunity.com/economy/image/class/570/124470650/73fx73f?language=english">
+										</div>
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+						</div>
+						<div class="tradeoffer_footer">
+																					<div style="clear: right;"></div>
+						</div>
+					</div>
+					<div class="tradeoffer_rule"></div>
+				
+					<div class="tradeoffer" id="tradeofferid_258451">
+												<div class="tradeoffer_header">
+							You offered yene F*AWESOME a trade:						</div>
+													<div class="tradeoffer_message">
+								"Thank you for using dotadup.com"
+							</div>
+												<div class="tradeoffer_items_ctn  inactive">
+														<div class="tradeoffer_items primary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/profiles/76561198080209564" data-miniprofile="119943836">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/a0/a0ba3cd16ad135fd6b9280d0a8e4bef505cd61a9.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									You offered:								</div>
+								<div class="tradeoffer_item_list">
+																			<div class="trade_item " style="border-color: #D2D2D2; " data-economy-item="570/2/316505426/76561198080209564">
+											<img src="http://cdn.steamcommunity.com/economy/image/My2v-0m9Q_MjXsQTS3AMH4thZUoNzU2z95AXCa-WRLj6JpgAEKEF4YOH2O1tEFCRk2Y-DwDSTbfxmxAbroBTsvVknAAIqASrk9ve43NKQ4S8dnlfRJY9veCNDRzgiR67_XOKXlbwFLfRzIzhMgwH0IYgcANU1wTs9sQcXrLcB-X5etENX_NBqpfH3A==/96fx96f">
+										</div>
+																			<div class="trade_item " style="border-color: #D2D2D2; " data-economy-item="570/2/992276690/76561198080209564">
+											<img src="http://cdn.steamcommunity.com/economy/image/gPcPGg0sQ244pRYEwSMaJDi7xatJXE0u7GvFHiXFUoNJ_DjhVDAFfJh8CvrnQ0aqILye7kRDTSrqYMIMJNNFiUa-IfpGOAQ2kCsK9ORDVLI_ut2_FgE9IuV_xB4kxU6JXf0s61EKFnWMOgi7v1RF4mCsh-NEQFR6uDfPGzuGQNcf8yy2GmRHfcUxXaDuDx7rZ6mCuV0DDCQ=/96fx96f">
+										</div>
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+															<div class="tradeoffer_items_banner ">
+									Trade Declined 14 Sep 2013								</div>
+														<div class="tradeoffer_items secondary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/id/yene" data-miniprofile="4249969">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/cc/ccb301444d77f74a563e0e568cb7cc1b160abb1c.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									For yene F*AWESOME's:								</div>
+								<div class="tradeoffer_item_list">
+																			<div class="trade_item missing" style="border-color: #D2D2D2; " data-economy-item="570/2/285609197/76561197964515697">
+											<img src="http://cdn.steamcommunity.com/economy/image/d0L39Af1Vka9CWY96t3yLM8OPUVDhVgGace1Jw47uou-ScAPXukQVB3QesPMva6i1wlmAE6aWAJvzLI1Dy2tgbEL2RRM4REeHZF2wY7xoKDVDzlBHM4EA23RuBkQeuGNsFbCFVn4B1UKlnjexc3_4IkffAEcnUUPbcbuJBd7qo3tRYUDEbRXCEDHfJiUq_jjlkJ4BhiSQF44jawoRw==/73fx73f">
+										</div>
+																			<div class="trade_item missing" style="" data-economy-item="classinfo/570/124470650/57949762">
+											<img src="http://cdn.steamcommunity.com/economy/image/class/570/124470650/73fx73f?language=english">
+										</div>
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+						</div>
+						<div class="tradeoffer_footer">
+																					<div style="clear: right;"></div>
+						</div>
+					</div>
+					<div class="tradeoffer_rule"></div>
+				
+					<div class="tradeoffer" id="tradeofferid_258047">
+												<div class="tradeoffer_header">
+							You offered yene F*AWESOME a trade:						</div>
+													<div class="tradeoffer_message">
+								"Thank you for using dotadup.com"
+							</div>
+												<div class="tradeoffer_items_ctn  inactive">
+														<div class="tradeoffer_items primary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/profiles/76561198080209564" data-miniprofile="119943836">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/a0/a0ba3cd16ad135fd6b9280d0a8e4bef505cd61a9.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									You offered:								</div>
+								<div class="tradeoffer_item_list">
+																			<div class="trade_item " style="border-color: #D2D2D2; " data-economy-item="570/2/992276690/76561198080209564">
+											<img src="http://cdn.steamcommunity.com/economy/image/gPcPGg0sQ244pRYEwSMaJDi7xatJXE0u7GvFHiXFUoNJ_DjhVDAFfJh8CvrnQ0aqILye7kRDTSrqYMIMJNNFiUa-IfpGOAQ2kCsK9ORDVLI_ut2_FgE9IuV_xB4kxU6JXf0s61EKFnWMOgi7v1RF4mCsh-NEQFR6uDfPGzuGQNcf8yy2GmRHfcUxXaDuDx7rZ6mCuV0DDCQ=/96fx96f">
+										</div>
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+															<div class="tradeoffer_items_banner ">
+									Trade Offer Canceled 14 Sep 2013								</div>
+														<div class="tradeoffer_items secondary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/id/yene" data-miniprofile="4249969">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/cc/ccb301444d77f74a563e0e568cb7cc1b160abb1c.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									For yene F*AWESOME's:								</div>
+								<div class="tradeoffer_item_list">
+																			<div class="trade_item missing" style="" data-economy-item="classinfo/570/124470650/57949762">
+											<img src="http://cdn.steamcommunity.com/economy/image/class/570/124470650/73fx73f?language=english">
+										</div>
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+						</div>
+						<div class="tradeoffer_footer">
+																					<div style="clear: right;"></div>
+						</div>
+					</div>
+					<div class="tradeoffer_rule"></div>
+				
+					<div class="tradeoffer" id="tradeofferid_257646">
+												<div class="tradeoffer_header">
+							You offered yene F*AWESOME a trade:						</div>
+													<div class="tradeoffer_message">
+								"testnachricht"
+							</div>
+												<div class="tradeoffer_items_ctn  inactive">
+														<div class="tradeoffer_items primary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/profiles/76561198080209564" data-miniprofile="119943836">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/a0/a0ba3cd16ad135fd6b9280d0a8e4bef505cd61a9.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									You offered:								</div>
+								<div class="tradeoffer_item_list">
+																			<div class="trade_item " style="border-color: #D2D2D2; " data-economy-item="570/2/992276690/76561198080209564">
+											<img src="http://cdn.steamcommunity.com/economy/image/gPcPGg0sQ244pRYEwSMaJDi7xatJXE0u7GvFHiXFUoNJ_DjhVDAFfJh8CvrnQ0aqILye7kRDTSrqYMIMJNNFiUa-IfpGOAQ2kCsK9ORDVLI_ut2_FgE9IuV_xB4kxU6JXf0s61EKFnWMOgi7v1RF4mCsh-NEQFR6uDfPGzuGQNcf8yy2GmRHfcUxXaDuDx7rZ6mCuV0DDCQ=/96fx96f">
+										</div>
+																			<div class="trade_item " style="border-color: #D2D2D2; " data-economy-item="570/2/1023024059/76561198080209564">
+											<img src="http://cdn.steamcommunity.com/economy/image/ksvXf9_5JagiyUe1u6HP2iqHHc6biSvo9geUr19Hh31bwOCEhuVjuoIQW0udwZNUMoBGi5aWK-zwDJO9XlGQd1SC-Z-U7WLwh1BMTZ2PlUFtkgfKyMtl4vY8jqIQR5t9SPLnjpDwfrHICVkdwN7EEiTCUIbDkDC9q1vO_xNSyi4JnaTSx7glutZbAEHF2MVCdN0Z0MY=/96fx96f">
+										</div>
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+															<div class="tradeoffer_items_banner ">
+									Trade Offer Canceled 14 Sep 2013								</div>
+														<div class="tradeoffer_items secondary">
+								<div class="tradeoffer_items_avatar_ctn">
+									<a class="tradeoffer_avatar playerAvatar tiny online" href="http://steamcommunity.com/id/yene" data-miniprofile="4249969">
+										<img src="http://media.steampowered.com/steamcommunity/public/images/avatars/cc/ccb301444d77f74a563e0e568cb7cc1b160abb1c.jpg">
+									</a>
+								</div>
+								<div class="tradeoffer_items_header">
+									For yene F*AWESOME's:								</div>
+								<div class="tradeoffer_item_list">
+																			<div class="trade_item " style="border-color: #D2D2D2; " data-economy-item="570/2/297366146/76561197964515697">
+											<img src="http://cdn.steamcommunity.com/economy/image/d0L39Af1Vka9CWY96t3yLM8OPUVDhVgGace1Jw47uou-ScAPXukQVB3QesPMva6i1wlmAE6aWAJvzLI1Dy2tgbEL2RRM4REeHZF2wY7xoKDVDzlBHM4EA23RuBkQeuGNsFbCFVn4B1UKlnjexc3_4IkffAEcnUUPbcbuJBd7qo3tRYUDEbRXCEDHfJiUq_jjlkJ4BhiSQF44jawoRw==/73fx73f">
+										</div>
+																			<div class="trade_item missing" style="" data-economy-item="classinfo/570/124470650/57949762">
+											<img src="http://cdn.steamcommunity.com/economy/image/class/570/124470650/73fx73f?language=english">
+										</div>
+																		<div style="clear: left;"></div>
+								</div>
+							</div>
+						</div>
+						<div class="tradeoffer_footer">
+																					<div style="clear: right;"></div>
+						</div>
+					</div>
+					<div class="tradeoffer_rule"></div>
+									</div>
+		<div class="profile_rightcol">
+			<div class="rightcol_controls">
+				<div class="rightcol_controls_content">
+					<div class="btn_darkblue_white_innerfade btn_medium new_trade_offer_btn" onclick="ShowFriendSelect( 'New trade offer...', StartTradeOffer );"><span>New trade offer...</span></div>
+				</div>
+				<div class="rightcol_controls_rule"></div>
+				<div class="rightcol_controls_content">
+					<a class="right_controls_large_block" href="http://steamcommunity.com/profiles/76561198080209564/tradeoffers/">
+												<div class="title">Incoming Offers</div>
+						<div class="secondary">
+							(0 Pending)
+													</div>
+					</a>
+					<a class="right_controls_secondary_link " href="http://steamcommunity.com/profiles/76561198080209564/tradeoffers/?history=1">
+						Incoming Offer History (9)					</a>
+				</div>
+				<div class="rightcol_controls_rule"></div>
+				<div class="rightcol_controls_content">
+					<a class="right_controls_large_block" href="http://steamcommunity.com/profiles/76561198080209564/tradeoffers/sent/">
+												<div class="title">Sent Offers</div>
+						<div class="secondary">
+							(2 Pending)
+													</div>
+					</a>
+					<a class="right_controls_secondary_link active" href="http://steamcommunity.com/profiles/76561198080209564/tradeoffers/sent/?history=1">
+						Sent Offer History (27)					</a>
+				</div>
+				<div class="rightcol_controls_rule"></div>
+				<div class="rightcol_controls_content">
+					<a class="whiteLink" href="http://steamcommunity.com/profiles/76561198080209564/inventoryhistory/">View Trade History</a>
+				</div>
+			</div>
+			<br>
+			<div class="rightcol_controls">
+				<div class="rightcol_controls_content">
+					<a class="whiteLink" href="https://support.steampowered.com/kb_article.php?ref=2178-QGJV-0708" target="_blank">Frequently Asked Questions</a>
+				</div>
+			</div>
+		</div>
+		<div style="clear: both;"></div>
+	</div>
+</div>
+
+	<div id="footer_spacer"></div>
+	<div id="footer">
+		<div class="footer_content">
+			<span id="footerLogo"><img src="http://cdn.steamcommunity.com/public/images/skin_1/footerLogo_valve.png" width="96" height="26" border="0" alt="Valve Logo" /></span>
+			<span id="footerText">
+				&copy; Valve Corporation. All rights reserved. All trademarks are property of their respective owners in the US and other countries.<br/>Some geospatial data on this website is provided by <a href="http://www.geonames.org" target="_blank">geonames.org</a>.				<br>
+				<span class="valve_links">
+					<a href="http://store.steampowered.com/privacy_agreement/" target="_blank">Privacy Policy</a> | <a href="http://www.valvesoftware.com/legal.htm" target="_blank">Legal</a> | <a href="http://store.steampowered.com/subscriber_agreement/" target="_blank">Steam Subscriber Agreement</a>
+				</span>
+							
+							</span>
+		</div>
+	</div>
+
+	</body>
+</html>
