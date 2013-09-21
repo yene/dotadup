@@ -198,7 +198,8 @@
 	$htmlCode = str_replace('<head>','<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>',$htmlCode);  
 	$oldSetting = libxml_use_internal_errors( true ); // Fehler nicht beachten
 	libxml_clear_errors(); 
-	$html = new DOMDocument(); 
+	$html = new DOMDocument();
+	$newdoc = new DOMDocument('1.0');
 	$html->loadHTML($htmlCode);
 	$xpath = new DOMXPath( $html );
 	$tradeoffers = $xpath->query( "//div[@class='tradeoffer']" ); 
@@ -211,9 +212,14 @@
 		$username = $result->item(0)->nodeValue;
 		if (strpos($username,'yene') !== false) continue;
 
-		$tradeWidget = $html->saveHTML($tradeoffer);
-		echo $tradeWidget;
+		
+		// Import the node, and all its children, to the document
+		$node = $newdoc->importNode($tradeoffer, true);
+		// And then append it to the "<root>" node
+		$newdoc->appendChild($node);
+		
 	}
+	echo $newdoc->saveHTML();
 
 	libxml_clear_errors(); 
 	libxml_use_internal_errors( $oldSetting ); 
