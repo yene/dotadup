@@ -272,18 +272,12 @@ try {
 		<div class="wrapper">
 			<h1 class="title" style="display:inline;">Dotadup <span class="slogan"></span></h1>
 		</div>
-		<!--
 		<nav class="wrapper">
 			<ul>
-				<li class="active"><a href="#">Trade</a></li>
-				
-				<li><a href="#">Trade History</a></li>
-				<li><a href="#">Help</a></li>
-				<li><a href="#">Donate</a></li>
-				<li><a href="#">Settings</a></li>
-			
+				<li class="active"><a href="index.php">Request Offer</a></li>
+				<li><a href="history.php">Trade History</a></li>
 			</ul>
-		</nav>	-->
+		</nav>
 	</header>
 	<section class="wrapper">
 <?php
