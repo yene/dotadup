@@ -10,6 +10,10 @@
 	<link rel="stylesheet" media="screen" href="https://raw.github.com/necolas/normalize.css/master/normalize.css">
 	<link rel="icon" type="image/png" href="icon.png">
 	<link rel="shortcut icon" href="favicon.ico">
+	<link href="http://cdn.steamcommunity.com/public/css/skin_1/profilev2.css?v=3386317380" rel="stylesheet" type="text/css" >
+	<link href="http://cdn.steamcommunity.com/public/shared/css/shared_global.css?v=98446147" rel="stylesheet" type="text/css" >
+	<link href="http://cdn.steamcommunity.com/public/css/skin_1/profile_tradeoffers.css?v=102169244" rel="stylesheet" type="text/css" >
+
 	<style>
 	/* colors
 #F6F4F4 white
@@ -20,7 +24,6 @@
 	*/
 
 		/* apply a natural box layout model to all elements http://paulirish.com/2012/box-sizing-border-box-ftw/ */
-		* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
 		
 		body {
 			/* best helvetica */
@@ -162,6 +165,17 @@
 			font-size: 12px;
 		}
 
+		.tradeoffer_items {
+			opacity: 1 !important;
+		}
+
+		.tradeoffer_message {
+			display: none;
+		}
+
+		.tradeoffer_header {
+			display: none;
+		}
 
 	</style>
 </head>
@@ -184,6 +198,7 @@
 		</nav>	-->
 	</header>
 	<section class="wrapper">
+	<div class="profile_leftcol profile_subpage_general">
 <?php
 	$htmlCode = file_get_contents("history.html");
 	$htmlCode = str_replace('<head>','<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>',$htmlCode);  
@@ -192,20 +207,27 @@
 	$html = new DOMDocument(); 
 	$html->loadHTML($htmlCode);
 	$xpath = new DOMXPath( $html );
-	var_dump($xpath);
 	$tradeoffers = $xpath->query( "//div[@class='tradeoffer']" ); 
 	foreach ( $tradeoffers as $tradeoffer ) {
 		$result = $xpath->query("div/div[contains(concat(' ',normalize-space(@class),' '),' tradeoffer_items_banner ')]", $tradeoffer);
 		$message = $result->item(0)->nodeValue;
 		if (strpos($message,'Accepted') === false) continue;
 
-		echo $message;
+		$result = $xpath->query("div/div[contains(concat(' ',normalize-space(@class),' '),' secondary ')]/div[@class='tradeoffer_items_header']", $tradeoffer);
+		$username = $result->item(0)->nodeValue;
+		if (strpos($username,'yene') !== false) continue;
+
+		$tradeWidget = $html->saveHTML($tradeoffer);
+		echo $tradeWidget;
 	}
+
+	libxml_clear_errors(); 
+	libxml_use_internal_errors( $oldSetting ); 
 
 ?>
 
 
-
+	</div>
 	</section>
 	<footer class="wrapper">
 		<p>Dota 2 is a registered trademark of Valve Corporation. This site is not affiliated with Valve Corporation. All game images and names are property of Valve Corporation. We took all measures to make this site russian proof.</p>
