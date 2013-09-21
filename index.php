@@ -83,7 +83,7 @@ try {
 				var url = "http://<?=$host?>:3000/trade/<?=$_SESSION['userID']?>";
 				var data = "items=" + data.join(",");
 				$.post(url, data);
-				alert("Please accept the friend request and then the offer.");
+				alert("Please accept the friend request and the offer.");
 			}
 		}
 
@@ -103,7 +103,7 @@ try {
 				var url = "http://<?=$host?>:3000/donate/<?=$_SESSION['userID']?>";
 				var data = "items=" + data.join(",");
 				$.post(url, data);
-				alert("Please accept the friend request and then the offer.");
+				alert("Please accept the friend request and the offer.");
 			}
 		}
 <?php
