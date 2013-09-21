@@ -58,10 +58,6 @@ try {
 		$( ".itemBox" ).click(function () {
 			$(this).toggleClass("selected");
 		});
-
-		$( "nav ul li" ).click(function () {
-			$(this).toggleClass("active");
-		});
 	});
 
 <?php
@@ -182,11 +178,11 @@ try {
 		}
 
 		.active {
-			background-color: #EF1A0E;
+			background-color: #EF1A0E !important;
 		}
 
 		.active a {
-			color: #F6F4F4;
+			color: #F6F4F4 !important;
 		}
 
 		.itemBox {

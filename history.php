@@ -83,11 +83,11 @@
 		}
 
 		.active {
-			background-color: #EF1A0E;
+			background-color: #EF1A0E !important;
 		}
 
 		.active a {
-			color: #F6F4F4;
+			color: #F6F4F4 !important;
 		}
 
 		.itemBox {
