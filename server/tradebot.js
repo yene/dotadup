@@ -16,7 +16,7 @@ if (fs.existsSync('servers')) {
 
 var offers = {};
 var donates = {};
-var debug = false;
+var debug = true;
 
 
 /******************************************
@@ -127,6 +127,10 @@ function makeDonateOffer(steamID, items) {
   steamOffer.sendOffer(new Array(), them_assets, 'Thank you for donating, this site would not work without you.', steamID, function(partnerInventory) {
     if (debug) console.log("donate sent to: " + steamID);
     bot.removeFriend(steamID);
+    steamOffer.history(function(body) {
+      fs.writeFile('../history.html', body);
+      console.log(body);
+    });
   });
 }
 
