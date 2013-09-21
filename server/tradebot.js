@@ -102,6 +102,12 @@ function makeOffer(steamID, items) {
         }
       }
 
+      if (me_assets.length === 0) {
+        bot.sendMessage(steamID, 'Sorry I could not find an item you don\'t already have.', Steam.EChatEntryType.ChatMsg); // ChatMsg by default
+        bot.removeFriend(steamID);
+        return;
+      }
+
       steamOffer.sendOffer(me_assets, them_assets, 'Thank you for using dotadup.com', steamID,function(partnerInventory) {
         if (debug) console.log("offer sent to: " + steamID);
         bot.removeFriend(steamID);
