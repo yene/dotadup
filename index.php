@@ -321,9 +321,9 @@ try {
 
 		$mergedItems = $items['rgInventory'];
 
-		foreach ($mergedItems as $key => &$value) {
+		foreach ($mergedItems as $key => $value) {
 			$itemID = $value["classid"] . "_" . $value["instanceid"];
-			$value = array_merge($value, $items['rgDescriptions'][$itemID]);
+			$mergedItems[$key] = array_merge($mergedItems[$key], $items['rgDescriptions'][$itemID]);
 		}
 
 		$douplicateItems = array();
