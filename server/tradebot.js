@@ -1,3 +1,4 @@
+require('./steam-login.js');
 var Steam = require('steam');
 var fs = require('fs');
 var SteamTrade = require('steam-trade');
@@ -145,13 +146,12 @@ function makeDonateOffer(steamID, items) {
 Steam login and friend management
 
 ******************************************/
-
 var bot = new Steam.SteamClient();
 bot.logOn({
-  accountName: 'b337138',
-  password: 'b337138@rmqkr.net',
-  authCode: "KJWGW",
-  shaSentryfile: sentry
+  accountName: loginAccountName,
+  password: loginPassword,
+  authCode: loginAuthCode,
+  shaSentryfile: loginShaSentryfile
 });
 
 bot.on('loggedOn', function() {
