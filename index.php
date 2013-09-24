@@ -276,7 +276,14 @@ try {
 	</header>
 	<section class="wrapper">
 <?php
-	if (!isset($_SESSION['userID'])) {
+$fp = @fsockopen($host, 3000, $errno, $errstr, 2);
+if (!$fp) {
+?>
+	<h1>Sorry, trade bot is offline.</h1>
+	<p>Please come back later</p>
+<?php
+
+} else if (!isset($_SESSION['userID'])) {
 ?>
 <form method="post">
 	<h1>Select your duplicate items and we send you a Steam Trade Offer.</h1>
