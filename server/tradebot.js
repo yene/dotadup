@@ -151,7 +151,7 @@ bot.logOn({
   accountName: loginAccountName,
   password: loginPassword,
   authCode: loginAuthCode,
-  shaSentryfile: loginShaSentryfile
+  shaSentryfile: sentry
 });
 
 bot.on('loggedOn', function() {
