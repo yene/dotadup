@@ -20,3 +20,7 @@ Javascript side
 Server side
 * server adds user as friend
 * server sends user the offer
+
+
+Notes
+* snowdrop staff exists twice: once with "instanceid": "0" and "instanceid": "59106716"
