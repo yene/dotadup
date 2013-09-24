@@ -331,7 +331,7 @@ try {
 
 		foreach ($mergedItems as $key => $value) {
 
-			// only show items that heroes can wear, are not from another type, and are Rare, Uncommon or common
+			// only show items that heroes can wear, are not from another type, tradable, and are Rare, Uncommon or common
 			$isWearable = false;
 			$rarity = "";
 			$rarityColor = "";
