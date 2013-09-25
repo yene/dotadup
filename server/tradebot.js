@@ -110,7 +110,6 @@ function makeOffer(steamID, items) {
       }
 
       steamOffer.sendOffer(me_assets, them_assets, 'Thank you for using dotadup.com', steamID,function(partnerInventory) {
-        if (debug) console.log("offer sent to: " + steamID);
         bot.removeFriend(steamID);
       });
     })
@@ -132,11 +131,9 @@ function makeDonateOffer(steamID, items) {
   }
 
   steamOffer.sendOffer(new Array(), them_assets, 'Thank you for donating, this site would not work without you.', steamID, function(partnerInventory) {
-    if (debug) console.log("donate sent to: " + steamID);
     bot.removeFriend(steamID);
     steamOffer.history(function(body) {
       fs.writeFile('../history.html', body);
-      console.log(body);
     });
   });
 }
